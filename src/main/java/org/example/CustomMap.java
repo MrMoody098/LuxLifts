@@ -2,7 +2,7 @@ package org.example;
 
 import org.example.DataTypes.Location;
 
-import org.example.DataTypes.vehicleType;
+import org.example.DataTypes.VehicleType;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,7 +42,7 @@ public class CustomMap {
 
             Location vehicleLocation = new Location(x, y);
 
-            Vehicle newVehicle = new Vehicle("Vehicle" + (i + 1), 3.7, vehicleType.limo, vehicleLocation);
+            Vehicle newVehicle = new Vehicle("Vehicle" + (i + 1), 3.7, VehicleType.limo, vehicleLocation);
 
           
             
@@ -59,7 +59,7 @@ public class CustomMap {
         int x = location.getX()- 1; // this is -1 bc java decided to go from 0 that's why it wasn't right
         int y = location.getY()- 1;
     
-        System.out.println("Adding vehicle at map coordinates: (" + x + ", " + y + ")");
+        System.out.println("Adding vehicle at map coordinates: (" + x + 1 + ", " + y + 1+")");
 
         if (isWithinMapBounds(x, y)) {
             grid[x][y] = 'V';
