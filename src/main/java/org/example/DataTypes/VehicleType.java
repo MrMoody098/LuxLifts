@@ -1,6 +1,6 @@
 package org.example.DataTypes;
 
-public enum vehicleType {
+public enum VehicleType {
     //All possible types of vehicles
     limo,
     helicopter,

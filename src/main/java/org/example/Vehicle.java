@@ -1,17 +1,26 @@
 package org.example;
 
-import org.example.DataTypes.vehicleType;
+import org.example.DataTypes.Location;
+import org.example.DataTypes.VehicleType;
 
 public class Vehicle {
-    private String registrationNumber;
+    private Location location;
+     private String registrationNumber;
     private double driverRating;
-    private vehicleType type;
+    private VehicleType type;
     private boolean isAvailable;
 
-    public Vehicle(String registrationNumber, double driverRating, vehicleType type) {
+    public Vehicle(String registrationNumber, double driverRating, VehicleType type, Location location) {
         this.registrationNumber = registrationNumber;
         this.driverRating = driverRating;
         this.type = type;
+        this.location = location;
+    }
+    public Location getLocation() {
+        return location;
+    }
+    public void setlocation(int x, int y){
+        this.location = new Location(x,y);
     }
 //getter and setter methods for all the above variables
     public String getRegistrationNumber() {
@@ -26,10 +35,10 @@ public class Vehicle {
     public void setDriverRating(double driverRating) {
         this.driverRating = driverRating;
     }
-    public vehicleType getType() {
+    public VehicleType getType() {
         return type;
     }
-    public void setType(vehicleType type) {
+    public void setType(VehicleType type) {
         this.type = type;
     }
     public boolean isAvailable() {
