@@ -1,12 +1,22 @@
 package org.example.DataTypes;
 
+
 public class Location {
-    //Represents a location on the map using x and y coordinates.
-    int x;
-    int y;
+    private int x;
+    private int y;
+
     public Location(int x, int y) {
         this.x = x;
-        this.y =y;
+        this.y = y;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+   
+    public int getY() {
+        return y;
     }
 
     public int getX() {
@@ -22,3 +32,4 @@ public class Location {
         this.y = y;
     }
 }
+

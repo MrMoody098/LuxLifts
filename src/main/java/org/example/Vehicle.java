@@ -1,7 +1,7 @@
 package org.example;
 
 import org.example.DataTypes.Location;
-import org.example.DataTypes.VehicleType;
+import org.example.DataTypes.vehicleType;
 
 public class Vehicle {
     private Location location;
@@ -9,16 +9,21 @@ public class Vehicle {
     private double driverRating;
     private VehicleType type;
     private boolean isAvailable;
+    private Location location;
 
-    public Vehicle(String registrationNumber, double driverRating, VehicleType type, Location location) {
+    //constructor
+    public Vehicle(String registrationNumber, double driverRating, vehicleType type, Location location) {
+
         this.registrationNumber = registrationNumber;
         this.driverRating = driverRating;
         this.type = type;
         this.location = location;
     }
+  
     public Location getLocation() {
         return location;
     }
+  
     public void setlocation(int x, int y){
         this.location = new Location(x,y);
     }
@@ -53,4 +58,8 @@ public class Vehicle {
         System.out.println("Vehicle Type: " + this.type);
         System.out.println("Is Available: " + this.isAvailable);
     }
+    public Location getLocation() {
+        return location;
+    }
 }
+
