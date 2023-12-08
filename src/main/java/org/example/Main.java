@@ -1,7 +1,7 @@
 package org.example;
-import org.example.DataTypes.Location;
+import org.example.Authentication.Auth;
+
 import java.io.FileNotFoundException;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 

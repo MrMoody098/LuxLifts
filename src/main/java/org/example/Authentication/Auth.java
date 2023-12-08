@@ -1,4 +1,4 @@
-package org.example;
+package org.example.Authentication;
 import java.io.*;
 
 //this class should be able to login/signup a user
