@@ -1,7 +1,10 @@
 package org.example;
 import org.example.DataTypes.Location;
+<<<<<<< HEAD
 import org.example.DataTypes.vehicleType;
 
+=======
+>>>>>>> master
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -36,7 +39,11 @@ public class CustomMap {
             int y = scanner.nextInt();
 
             Location vehicleLocation = new Location(x, y);
+<<<<<<< HEAD
             Vehicle newVehicle = new Vehicle("Vehicle" + (i + 1), 3.7, vehicleType.limo, vehicleLocation);
+=======
+            Vehicle newVehicle = new Vehicle("Vehicle" + (i + 1), vehicleLocation);
+>>>>>>> master
 
             addVehicleToMap(newVehicle);
             vehicles.add(newVehicle);
