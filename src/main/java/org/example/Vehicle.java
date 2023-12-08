@@ -8,6 +8,7 @@ public class Vehicle {
     private double driverRating;
     private vehicleType type;
     private boolean isAvailable;
+<<<<<<< Updated upstream
 <<<<<<< HEAD
     private Location location;
 
@@ -16,7 +17,19 @@ public class Vehicle {
 
     public Vehicle(String registrationNumber, double driverRating, vehicleType type) {
 >>>>>>> master
+=======
+    private Location location;
+
+    public Location getLocation() {
+        return location;
+    }
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+    public Vehicle(String registrationNumber, double driverRating, vehicleType type, Location location) {
+>>>>>>> Stashed changes
         this.registrationNumber = registrationNumber;
+        this.location = location;
         this.driverRating = driverRating;
         this.type = type;
         this.location = location;
