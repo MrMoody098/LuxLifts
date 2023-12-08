@@ -1,22 +1,15 @@
 package org.example;
-<<<<<<< Updated upstream
+
 import org.example.DataTypes.Location;
-<<<<<<< HEAD
+
 import org.example.DataTypes.vehicleType;
 
-=======
->>>>>>> master
-=======
-
-
-
->>>>>>> Stashed changes
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import org.example.DataTypes.Location;
-import org.example.DataTypes.vehicleType;
+//import org.example.DataTypes.Location;
+//import org.example.DataTypes.vehicleType;
 
 public class CustomMap {
     private char[][] grid;
@@ -48,15 +41,11 @@ public class CustomMap {
             int y = scanner.nextInt();
 
             Location vehicleLocation = new Location(x, y);
-<<<<<<< Updated upstream
-<<<<<<< HEAD
+
             Vehicle newVehicle = new Vehicle("Vehicle" + (i + 1), 3.7, vehicleType.limo, vehicleLocation);
-=======
-            Vehicle newVehicle = new Vehicle("Vehicle" + (i + 1), vehicleLocation);
->>>>>>> master
-=======
-            Vehicle newVehicle = new Vehicle("Vehicle" + (i + 1), 3.6, vehicleType.limo, vehicleLocation);
->>>>>>> Stashed changes
+
+          
+            
 
             addVehicleToMap(newVehicle);
             vehicles.add(newVehicle);
