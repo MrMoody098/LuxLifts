@@ -1,25 +1,23 @@
-package org.example;
+//package name
+package App.Vehicles;
 
-import org.example.DataTypes.Location;
-import org.example.DataTypes.VehicleType;
+import App.DataTypes.Location;
+import App.DataTypes.VehicleType;
+import App.MapItem;
 
-public class Vehicle {
-    private Location location;
+public abstract class Vehicle implements MapItem {
+    private int Speed;
+    Location location;
      private String registrationNumber;
     private double driverRating;
     private VehicleType type;
     private boolean isAvailable;
     //constructor
-    public Vehicle(String registrationNumber, double driverRating, VehicleType type, Location location) {
-
+    public Vehicle(String registrationNumber, double driverRating, Location currentLocation) {
+        location = location;
         this.registrationNumber = registrationNumber;
         this.driverRating = driverRating;
-        this.type = type;
         this.location = location;
-    }
-  
-    public void setLocation(int x, int y){
-        this.location = new Location(x,y);
     }
 //getter and setter methods for all the above variables
     public String getRegistrationNumber() {
@@ -52,8 +50,29 @@ public class Vehicle {
         System.out.println("Vehicle Type: " + this.type);
         System.out.println("Is Available: " + this.isAvailable);
     }
-    public Location getLocation() {
+    public int getSpeed() {
+        return Speed;
+    }
+
+    @Override
+    public Location SetLocation(int x, int y) {
+        //move the Passenger to the new location x,y
+        location = new Location(x,y);
         return location;
+    }
+
+    @Override
+    public Location GetLocation() {
+        //return the current location of the Passenger
+        return this.location;
+    }
+
+    @Override
+    public Location UpdateLocation(int x, int y) {
+        //move the Passenger x,y amount from their current location
+        int CurrentX = location.getX();
+        int CurrentY = location.getY();
+        return SetLocation(CurrentX + x, CurrentY + y);
     }
 }
 
