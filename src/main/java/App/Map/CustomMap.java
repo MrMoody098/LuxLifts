@@ -1,6 +1,6 @@
-package App;
+package App.Map;
 
-import App.DataTypes.Location;
+import App.Vehicles.Helicopter;
 import App.Vehicles.Vehicle;
 
 import java.util.ArrayList;
@@ -51,10 +51,9 @@ public class CustomMap {
             Location vehicleLocation = new Location(x, y);
 
             // Create a new vehicle with a placeholder type (you can modify as needed)
-            Vehicle newVehicle = new Vehicle("Vehicle" + (i + 1), 3.7, vehicleLocation);
-
-            addVehicleToMap(newVehicle);
-            vehicles.add(newVehicle);
+            Helicopter heli = new Helicopter("2343",2.3,x,y);
+            addVehicleToMap(heli);
+            vehicles.add(heli);
         }
 
         System.out.println("Vehicles added successfully!");

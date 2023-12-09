@@ -1,6 +1,6 @@
 package App.Vehicles;
 
-import App.DataTypes.Location;
+import App.Map.Location;
 import App.DataTypes.VehicleType;
 
 public class PrivateJet extends Vehicle implements AirVehicle {

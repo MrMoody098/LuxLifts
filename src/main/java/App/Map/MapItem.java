@@ -1,6 +1,4 @@
-package App;
-
-import App.DataTypes.Location;
+package App.Map;
 
 public interface MapItem {
 

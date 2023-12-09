@@ -1,20 +1,19 @@
 //package name
 package App.Vehicles;
 
-import App.DataTypes.Location;
+import App.Map.Location;
 import App.DataTypes.VehicleType;
-import App.MapItem;
+import App.Map.MapItem;
 
 public abstract class Vehicle implements MapItem {
     private int Speed;
-    Location location;
+    private Location location;
      private String registrationNumber;
     private double driverRating;
     private VehicleType type;
     private boolean isAvailable;
     //constructor
-    public Vehicle(String registrationNumber, double driverRating, Location currentLocation) {
-        location = location;
+    public Vehicle(String registrationNumber, double driverRating, Location location) {
         this.registrationNumber = registrationNumber;
         this.driverRating = driverRating;
         this.location = location;

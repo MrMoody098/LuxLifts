@@ -1,4 +1,4 @@
-package App.DataTypes;
+package App.Map;
 
 
 public class Location {

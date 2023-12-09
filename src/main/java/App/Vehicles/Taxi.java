@@ -1,8 +1,8 @@
 package App.Vehicles;
 
-import App.DataTypes.Location;
+import App.Map.Location;
 import App.DataTypes.VehicleType;
-import App.MapItem;
+import App.Map.MapItem;
 
 public class Taxi extends Vehicle implements LandVehicle, MapItem {
     //use super to call the constructor of the parent class
