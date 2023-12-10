@@ -1,4 +1,4 @@
-package org.example.DataTypes;
+package App.Map;
 
 
 public class Location {
@@ -15,10 +15,10 @@ public class Location {
     public int getY(){
         return this.y;
     }
-    public void setX(){
-        this.x = x;
+    public void setX(int x){
+        this.x = this.x;
     }
-    public void setY(){
+    public void setY(int y){
         this.y = y;
     }
 }

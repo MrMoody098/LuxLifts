@@ -1,14 +1,17 @@
-package org.example.Authentication;
+package App.Authentication;
+import App.DataTypes.Passenger;
+import App.Map.Location;
+
 import java.io.*;
 import java.security.NoSuchAlgorithmException;
 
 //this class should be able to login/signup a user
 public class Auth {
-    public static String CSV_FILE = "src/main/java/org/example/UserData/Users.csv";
+    public static String CSV_FILE = "C:\\Users\\ticta\\MyRepos\\LuxLifts\\LuxLifts\\src\\main\\java\\App\\UserData\\Users.csv";
 
     //this method should be able to login a user
     // Updated login method using password hashing
-    public static boolean login(String username, String password) {
+    public static Passenger login(String username, String password) {
         String line;
 
         try (BufferedReader br = new BufferedReader(new FileReader(CSV_FILE))) {
@@ -19,17 +22,17 @@ public class Auth {
 
                 // Verify the entered password against the stored hashed password
                 if (username.equals(storedUsername) && Encryption.verifyPassword(password, storedPassword)) {
-                    return true;
+                    return new Passenger(username,new Location(5,5));
                 }
             }
         } catch (IOException | NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-        return false;
+        return null;
     }
 
     // Updated signup method using password hashing
-    public static boolean signup(String username, String password) throws FileNotFoundException {
+    public static Passenger signup(String username, String password) throws FileNotFoundException {
         String line;
 
         // Check if the username already exists
@@ -39,7 +42,7 @@ public class Auth {
                 String storedUsername = data[0].trim();
 
                 if (username.equals(storedUsername)) {
-                    return false;  // Username already exists
+                    return null;  // Username already exists
                 }
             }
         } catch (IOException e) {
@@ -52,10 +55,10 @@ public class Auth {
             writer.write(username + "," + hashedPassword);
             writer.newLine();
             System.out.println("Signup successful!");
-            return true;
+            return new Passenger(username,new Location(5,5));
         } catch (IOException | NoSuchAlgorithmException e) {
             e.printStackTrace();
-            return false;
+            return null;
         }
     }
 }
