@@ -7,6 +7,7 @@ import App.Vehicles.Vehicle;
 
 import java.io.FileNotFoundException;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -26,9 +27,9 @@ public class Main {
      */
     public static void main(String[] args) throws FileNotFoundException {
         // Test the Login and Signup functionality
-        Passenger user = LoginSignupTest();
         // Test the Map functionality
-        MapTest(user);
+        MapTest ();
+
     }
 
     /**
@@ -36,21 +37,28 @@ public class Main {
      * @throws FileNotFoundException If a file required for authentication is not found.
      */
     public static Passenger LoginSignupTest() throws FileNotFoundException {
-        boolean logged = false;
-        while (!logged) {
+        Passenger user = null;
+        //while user is still null loop
+        while (user==null) {
+
+            //prompt choice between 1.login and 2.signup
             System.out.println("1. Login\n2. Signup");
+            //store choice as String
             String choice = scanner.next();
-            if (Objects.equals(choice, "1") || choice.equalsIgnoreCase("LOGIN")) {
-            Passenger user =Login();
-            if(user==null){LoginSignupTest();}
-            else{return user;}
-            } else if (choice.equals("2") || choice.equalsIgnoreCase("SIGNUP")){
-            Passenger user =SignUp();
-                if(user==null){LoginSignupTest();}
-                else{return user;}
+            //if the choice = 1,or LOGIN case ignored then do this
+            if (Objects.equals(choice, "1") || choice.equalsIgnoreCase("LOGIN"))
+            {
+                //store the return of login could be null if unsuccessful
+                user=Login();
             }
-        }
-        return null;
+                //if the choice = 2,or SIGNUP case ignored then do this
+            else if (choice.equals("2") || choice.equalsIgnoreCase("SIGNUP")){
+                    //store Passenger return from signup could be null if unsuccessful
+                    user =SignUp();
+            }
+
+        }//return user cant be null as the while loop wont stop until user is not null
+        return user;
     }
 
     public static Passenger SignUp() throws FileNotFoundException {// User chose to signup
@@ -75,7 +83,7 @@ public static Passenger Login(){ // User chose to login
     /**
      * Method to test the Map functionality.
      */
-    public static void MapTest(Passenger user) {
+    public static void MapTest() {
         //we need to also add the user to this map
 
         // Create a CustomMap object
@@ -83,12 +91,16 @@ public static Passenger Login(){ // User chose to login
         customMap.displayMap();
         AddvehicleTest();
         MoveVehicle();
+        AddUser();
     }
     public static void AddvehicleTest(){
             // Add vehicles to the map
             customMap.addVehicles();
             // Display the updated map
             customMap.displayMap();
+    }
+    public static void AddUser(){
+
     }
     public static void MoveVehicle(){
         System.out.println("would like to move a vehicle? by regNumber\n1.Yes\n2.No");

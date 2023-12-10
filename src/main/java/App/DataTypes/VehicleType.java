@@ -5,5 +5,5 @@ public enum VehicleType {
     LIMO,
     HELICOPTER,
     PRIVATE_JET,
-    BOAT,
+    YACHT,
 }

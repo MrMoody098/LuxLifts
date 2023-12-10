@@ -9,16 +9,20 @@ public abstract class Vehicle implements MapItem {
     private int Speed;
     private Location location;
      private String registrationNumber;
+     private String phoneNumber;
     private double driverRating;
     private VehicleType type;
     private boolean isAvailable;
     //constructor
-    public Vehicle(String registrationNumber, double driverRating, Location location) {
+    public Vehicle(String registrationNumber, double driverRating,String driverName,String phoneNumber, Location location) {
         this.registrationNumber = registrationNumber;
         this.driverRating = driverRating;
         this.location = location;
     }
-//getter and setter methods for all the above variables
+
+
+
+    //getter and setter methods for all the above variables
     public String getRegistrationNumber() {
         return registrationNumber;
     }

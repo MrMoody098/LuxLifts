@@ -1,18 +1,20 @@
 package App.Map;
 
+import App.VehicleGenerator.VehicleDataReader;
 import App.Vehicles.Helicopter;
 import App.Vehicles.Vehicle;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import static App.VehicleGenerator.VehicleDataReader.returnVehicleList;
 
 /**
  * CustomMap class represents a grid-based map with vehicles.
  */
 public class CustomMap {
     private char[][] grid;
-    private List<Vehicle> vehicles; // Use custom data structures instead of built-in ones
+    private static List<Vehicle> vehicles; // Use custom data structures instead of built-in ones
 
     /**
      * Constructs a CustomMap object with a 10x10 grid and initializes it.
@@ -38,25 +40,9 @@ public class CustomMap {
      * Adds vehicles to the map based on user input.
      */
     public void addVehicles() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter the number of vehicles you want to add to the map:");
-        int numberOfVehicles = scanner.nextInt();
-
-        for (int i = 0; i < numberOfVehicles; i++) {
-            System.out.println("Enter the (x,y) coordinate for vehicle " + (i + 1) + ":");
-            int x = scanner.nextInt();
-            int y = scanner.nextInt();
-
-            Location vehicleLocation = new Location(x, y);
-
-            // Create a new vehicle with a placeholder type (you can modify as needed)
-            Helicopter heli = new Helicopter("2343",2.3,x,y);
-            addVehicleToMap(heli);
-            vehicles.add(heli);
-        }
-
         System.out.println("Vehicles added successfully!");
+        vehicles = returnVehicleList();
+        for(Vehicle vehicle : vehicles) {addVehicleToMap(vehicle);}
     }
 
     /**
