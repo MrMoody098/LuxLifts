@@ -1,6 +1,7 @@
 package App;
 
 import App.Authentication.Auth;
+import App.DataTypes.DoubleLinkedList;
 import App.DataTypes.Passenger;
 import App.Map.CustomMap;
 import App.Vehicles.Vehicle;
@@ -106,7 +107,8 @@ public static Passenger Login(){ // User chose to login
         System.out.println("would like to move a vehicle? by regNumber\n1.Yes\n2.No");
         String moveByReg = scanner.next();
         if(moveByReg.equalsIgnoreCase("yes")||moveByReg.equals("1")){
-            List<Vehicle> vehicles = customMap.getVehicles();
+            DoubleLinkedList<Vehicle> vehicles = customMap.getVehicles();
+
             System.out.println("Enter the regNumber of the vehicle you would like to move");
             String regNum = scanner.next();
             System.out.println("Perfect and where would you like to move it? (x,y)");
@@ -115,11 +117,10 @@ public static Passenger Login(){ // User chose to login
             System.out.println("Y: ");
             int y = scanner.nextInt();
 
-            for(Vehicle vehicle : vehicles){
-                if (vehicle.getRegistrationNumber().equals(regNum)){
-                    vehicle.SetLocation(x,y);
+            for (Vehicle vehicle : vehicles.getAll()) {
+                if (vehicle.getRegistrationNumber().equals(regNum)) {
+                    vehicle.SetLocation(x, y);
                 }
-
             }
         customMap.displayMap();
         }

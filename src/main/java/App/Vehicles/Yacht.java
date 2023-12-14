@@ -6,7 +6,7 @@ import App.Map.MapItem;
 public class Yacht extends Vehicle implements WaterVehicle,MapItem {
 
     public Yacht(String registrationNumber, double driverRating, String driverName, String phoneNumber, Location location) {
-        super(registrationNumber, driverRating, driverName, phoneNumber, location);
+        super(new YachtType(), registrationNumber, driverRating, driverName, phoneNumber, location);
     }
 
     @Override

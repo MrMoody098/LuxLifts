@@ -6,8 +6,8 @@ import App.DataTypes.VehicleType;
 public class Helicopter extends Vehicle implements AirVehicle {
     // use super to call the constructor of the parent class
     public Helicopter(String registrationNumber, double driverRating, String driverName, String phoneNumber, Location location) {
-        super(registrationNumber, driverRating, driverName, phoneNumber, location);
-        this.setType(VehicleType.HELICOPTER);
+        super(new HelicopterType(), registrationNumber, driverRating, driverName, phoneNumber, location);
+        
     }
 
     @Override

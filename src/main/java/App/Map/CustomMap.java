@@ -1,11 +1,14 @@
 package App.Map;
 
+import App.DataTypes.DoubleLinkedList;
 import App.VehicleGenerator.VehicleDataReader;
 import App.Vehicles.Helicopter;
 import App.Vehicles.Vehicle;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import App.DataTypes.*;
 
 import static App.VehicleGenerator.VehicleDataReader.returnVehicleList;
 
@@ -14,14 +17,14 @@ import static App.VehicleGenerator.VehicleDataReader.returnVehicleList;
  */
 public class CustomMap {
     private char[][] grid;
-    private static List<Vehicle> vehicles; // Use custom data structures instead of built-in ones
+    private DoubleLinkedList<Vehicle> vehicles;
 
     /**
      * Constructs a CustomMap object with a 10x10 grid and initializes it.
      */
     public CustomMap() {
         this.grid = new char[10][10];
-        this.vehicles = new ArrayList<>();
+        this.vehicles = new DoubleLinkedList<>(); 
         initializeMap();
     }
 
@@ -41,9 +44,14 @@ public class CustomMap {
      */
     public void addVehicles() {
         System.out.println("Vehicles added successfully!");
-        vehicles = returnVehicleList();
-        for(Vehicle vehicle : vehicles) {addVehicleToMap(vehicle);}
+        List<Vehicle> returnedList = VehicleDataReader.returnVehicleList();
+
+        for (Vehicle vehicle : returnedList) {
+            vehicles.add(vehicle);
+            addVehicleToMap(vehicle);
+        }
     }
+    
 
     /**
      * Adds a vehicle to the map at the specified coordinates.
@@ -53,11 +61,26 @@ public class CustomMap {
         Location location = vehicle.GetLocation();
         int x = location.getX();
         int y = location.getY();
-
+    
         System.out.println("Adding vehicle at map coordinates: (" + x + ", " + y + ")");
+    
+        if (isWithinMapBounds(x, y)) {
+            grid[x][y] = 'V';  // Change made here
+             
+        } else {
+            System.out.println("Invalid coordinates: (" + x + ", " + y + ")");
+        }
+        
+    }
+
+    private void removeVehicleFromMap(Vehicle vehicle) {
+        Location location = vehicle.GetLocation();
+        int x = location.getX();
+        int y = location.getY();
 
         if (isWithinMapBounds(x, y)) {
-            grid[x - 1][y - 1] = 'V';
+            grid[x - 1][y - 1] = '.';
+            vehicles.remove(vehicle); // Remove the vehicle from the linked list
         }
     }
 
@@ -88,7 +111,7 @@ public class CustomMap {
      * Gets the list of vehicles on the map.
      * @return The list of vehicles.
      */
-    public List<Vehicle> getVehicles() {
+    public DoubleLinkedList<Vehicle> getVehicles() {
         return vehicles;
     }
 }
