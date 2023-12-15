@@ -6,11 +6,11 @@ import java.io.*;
 import java.security.NoSuchAlgorithmException;
 
 //this class should be able to login/signup a user
-public class Auth {
-    public static String CSV_FILE = "C:\\Users\\ticta\\MyRepos\\LuxLifts\\LuxLifts\\src\\main\\java\\App\\UserData\\Users.csv";
+public class Auth { 
+    public static String CSV_FILE = "/Users/miaborko/LuxLifts/LuxLifts/src/main/java/App/UserData/User.java";
 
     //this method should be able to login a user
-    // Updated login method using password hashing
+    // Updated login method using1 password hashing
     public static Passenger login(String username, String password) {
         String line;
 
