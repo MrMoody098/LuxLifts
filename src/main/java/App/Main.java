@@ -16,6 +16,7 @@ import java.util.Scanner;
  * The main class for testing the Login, Signup, and Map functionalities.
  */
 public class Main {
+    private static Passenger user;
     public static CustomMap customMap = new CustomMap();
 
     // Scanner object for user input
@@ -29,6 +30,7 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         // Test the Login and Signup functionality
         // Test the Map functionality
+        user = LoginSignupTest();
         MapTest ();
 
     }
@@ -38,7 +40,7 @@ public class Main {
      * @throws FileNotFoundException If a file required for authentication is not found.
      */
     public static Passenger LoginSignupTest() throws FileNotFoundException {
-        Passenger user = null;
+        //Passenger user = null;
         //while user is still null loop
         while (user==null) {
 
@@ -101,7 +103,19 @@ public static Passenger Login(){ // User chose to login
             customMap.displayMap();
     }
     public static void AddUser(){
+        System.out.println("Adding the user to the map.");
 
+        System.out.println("Enter the initial location for the user (x, y):");
+        System.out.print("X: ");
+        int x = scanner.nextInt();
+        System.out.print("Y: ");
+        int y = scanner.nextInt();
+
+        user.SetLocation(x, y);
+        customMap.addElement(user, "U");
+
+        System.out.println("User added to the map.");
+        customMap.displayMap();
     }
     public static void MoveVehicle(){
         System.out.println("would like to move a vehicle? by regNumber\n1.Yes\n2.No");
