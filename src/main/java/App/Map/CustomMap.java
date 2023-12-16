@@ -71,6 +71,9 @@ public class CustomMap {
         System.out.println("Enter your y-coordinate:");
         int y = scanner.nextInt();
 
+        if (isWithinMapBounds(x, y)) {
+            grid[x - 1][y - 1] = 'V';//\uD83D\uDE95 This is
+
         User user = new User(username, new Location(x, y));
 
         addElement(user, "U");
@@ -88,6 +91,7 @@ public class CustomMap {
             mapElements.put(location, symbol);
         } else {
             System.out.println("Invalid coordinates: (" + location.getX() + ", " + location.getY() + ")");
+
         }
     }
 
