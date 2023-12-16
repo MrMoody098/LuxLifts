@@ -57,7 +57,7 @@ public class CustomMap {
         System.out.println("Adding vehicle at map coordinates: (" + x + ", " + y + ")");
 
         if (isWithinMapBounds(x, y)) {
-            grid[x - 1][y - 1] = 'V';
+            grid[x - 1][y - 1] = 'V';//\uD83D\uDE95 This is
         }
     }
 
