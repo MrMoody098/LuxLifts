@@ -4,17 +4,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Random;
 
+import App.DataTypes.DefaultTaxiTypeList;
+import App.DataTypes.TaxiTypeList;
+
 public class CsvGenerator {
 
-    public enum VehicleType {
-        LIMO,
-        HELICOPTER,
-        PRIVATE_JET,
-        YACHT,
-    }
+    
 
     public static void main(String[] args) {
-        String csvFilePath = "C:\\Users\\ticta\\MyRepos\\LuxLifts\\LuxLifts\\src\\main\\java\\App\\Vehicles\\Vehicles.csv";
+        String csvFilePath = "/Users/miaborko/LuxLifts/LuxLifts/src/main/java/App/VehicleGenerator/Vehicles.csv";
 
         try (FileWriter csvWriter = new FileWriter(csvFilePath)) {
             // Write header to the CSV file
@@ -22,7 +20,7 @@ public class CsvGenerator {
 
             // Generate 20 entries
             for (int i = 0; i < 20; i++) {
-                VehicleType type = VehicleType.values()[new Random().nextInt(VehicleType.values().length)];
+                String type = getRandomVehicleType();
                 String regNum = generateRegistrationNumber();
                 String driverRating = generateDriverRating(); // Updated to return a String
                 String driverName = generateDriverName();
@@ -39,6 +37,19 @@ public class CsvGenerator {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private static String getRandomVehicleType() {
+        String[] allVehicleTypes = {"LIMO", "HELICOPTER", "PRIVATE_JET", "YACHT", "TAXI"};
+        String type = allVehicleTypes[new Random().nextInt(allVehicleTypes.length)];
+
+        // For taxi, choose subcategory dynamically
+        if ("TAXI".equals(type)) {
+            TaxiTypeList taxiTypeList = new DefaultTaxiTypeList();
+            type = taxiTypeList.getRandomTaxiType();
+        }
+
+        return type;
     }
 
     private static String generateRegistrationNumber() {
@@ -60,8 +71,8 @@ public class CsvGenerator {
         // Generate a random driver name (placeholder)
         String[] names = {
                 //100 random names to pick from
-                "Sophia Adams", "Ethan Baker", "Olivia Carter", "Liam Davis", "Ava Edwards",
-                // ... (remaining names)
+                "Sophia Adams", "Ethan Baker", "Olivia Carter", "Liam Davis", "Ava Edwards", "Daniel Moody", "Mia the driver"
+                
         };
         return names[new Random().nextInt(names.length)];
     }

@@ -5,10 +5,8 @@ import App.DataTypes.VehicleType;
 import App.Map.MapItem;
 
 public class Limo extends Vehicle implements LandVehicle, MapItem {
-    //use super to call the constructor of the parent class
     public Limo(String registrationNumber, double driverRating, String driverName, String phoneNumber, Location location) {
-        super(registrationNumber, driverRating, driverName, phoneNumber, location);
-        this.setType(VehicleType.HELICOPTER);
+        super(new LimoType(), registrationNumber, driverRating, driverName, phoneNumber, location);
     }
     @Override
     public void drive() {

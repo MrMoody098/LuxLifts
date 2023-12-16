@@ -13,8 +13,10 @@ public abstract class Vehicle implements MapItem {
     private double driverRating;
     private VehicleType type;
     private boolean isAvailable;
-    //constructor
-    public Vehicle(String registrationNumber, double driverRating,String driverName,String phoneNumber, Location location) {
+    
+
+    public Vehicle(VehicleType type, String registrationNumber, double driverRating, String driverName, String phoneNumber, Location location) {
+        this.type = type;
         this.registrationNumber = registrationNumber;
         this.driverRating = driverRating;
         this.location = location;
