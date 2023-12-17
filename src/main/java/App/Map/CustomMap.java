@@ -72,7 +72,7 @@ public class CustomMap {
         int y = scanner.nextInt();
 
         if (isWithinMapBounds(x, y)) {
-            grid[x - 1][y - 1] = 'V';//\uD83D\uDE95 This is
+            grid[x - 1][y - 1] = 'V';
 
         User user = new User(username, new Location(x, y));
 
@@ -80,6 +80,8 @@ public class CustomMap {
 
         System.out.println("User added successfully!");
     }
+}
+    
     
 
     public void addElement(MapItem element, String symbol) {
