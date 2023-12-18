@@ -2,8 +2,8 @@
 package App.Vehicles;
 
 import App.Map.Location;
-import App.DataTypes.VehicleType;
 import App.Map.MapItem;
+import App.Vehicles.Taxi.Taxis;
 
 public abstract class Vehicle implements MapItem {
     private int Speed;
@@ -15,8 +15,7 @@ public abstract class Vehicle implements MapItem {
     private boolean isAvailable;
     
 
-    public Vehicle(VehicleType type, String registrationNumber, double driverRating, String driverName, String phoneNumber, Location location) {
-        this.type = type;
+    public Vehicle(String registrationNumber, double driverRating, String driverName, String phoneNumber, Location location) {
         this.registrationNumber = registrationNumber;
         this.driverRating = driverRating;
         this.location = location;
@@ -43,6 +42,7 @@ public abstract class Vehicle implements MapItem {
     public void setType(VehicleType type) {
         this.type = type;
     }
+    
     public boolean isAvailable() {
         return isAvailable;
     }

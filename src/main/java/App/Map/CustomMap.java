@@ -3,9 +3,9 @@ package App.Map;
 import App.DataTypes.DoubleLinkedList;
 import App.UserData.User;
 import App.VehicleGenerator.VehicleDataReader;
-import App.Vehicles.Helicopter;
+
 import App.Vehicles.Vehicle;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,12 +21,12 @@ import static App.VehicleGenerator.VehicleDataReader.returnVehicleList;
 public class CustomMap {
     private Map<Location, String> mapElements;
     private DoubleLinkedList<Vehicle> vehicles;
-    private DoubleLinkedList<User> users;
+    
 
     public CustomMap() {
         this.mapElements = new HashMap<>();
         this.vehicles = new DoubleLinkedList<>();
-        this.users = new DoubleLinkedList<>();
+        
         initializeMap();
     }
 
@@ -83,7 +83,7 @@ public class CustomMap {
         Location location = element.GetLocation();
         System.out.println("Adding " + element.getClass().getSimpleName() +
                 " at map coordinates: " + location);
-
+    
         if (isWithinMapBounds(location.getX(), location.getY())) {
             mapElements.put(location, symbol);
         } else {
