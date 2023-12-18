@@ -18,15 +18,16 @@ public class CustomMap {
     private DoubleLinkedList<Vehicle> vehicles;
     private DoubleLinkedList<Passenger> users;
     private static String[][] grid;
+
     public CustomMap() {
         this.mapElements = new HashMap<>();
         this.vehicles = new DoubleLinkedList<>();
-        this.users = new DoubleLinkedList<>();
+
         initializeMap();
     }
 
     /**
-     * Initializes the map 
+     * Initializes the map
      */
     private void initializeMap() {
         List<Vehicle> vehicleList = VehicleDataReader.returnVehicleList();
@@ -53,8 +54,8 @@ public class CustomMap {
             }
         }
     }
-    
-    public void addUser() {
+
+    public boolean addUser() {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Enter your username:");
@@ -66,73 +67,79 @@ public class CustomMap {
         System.out.println("Enter your y-coordinate:");
         int y = scanner.nextInt();
 
+
         if (isWithinMapBounds(x, y)) {
             grid[x - 1][y - 1] = "\\u001B[31mV\\u001B[0m\"";
 
-        Passenger user = new Passenger(username, new Location(x, y));
+            Passenger user = new Passenger(username, new Location(x, y));
 
-        addElement(user, "U");
+            Location location = new Location(x, y);
 
-        System.out.println("User added successfully!");
-    }
-}
-    
-    
+            if (isWithinMapBounds(x, y) && !mapElements.containsKey(location)) {
+                User user = new User(username, location);
+                addElement(user, "U");
 
-    public void addElement(MapItem element, String symbol) {
-        Location location = element.GetLocation();
-        System.out.println("Adding " + element.getClass().getSimpleName() +
-                " at map coordinates: " + location);
-
-        if (isWithinMapBounds(location.getX(), location.getY())) {
-            mapElements.put(location, symbol);
-        } else {
-            System.out.println("Invalid coordinates: (" + location.getX() + ", " + location.getY() + ")");
-        }
-    }
-
-    private void removeElement(MapItem element) {
-        Location location = element.GetLocation();
-        System.out.println("Removing " + element.getClass().getSimpleName() +
-                " from map coordinates: " + location);
-
-        mapElements.remove(location);
-    }
-    
-    
-
-    
-
-    /**
-     * Displays the current state of the map.
-     */
-    //DanielMoody Hi i changed this so that that is flipped  making 0,0 xy start in the bottom left corner
-    public void displayMap() {
-        for (int i = 9; i >= 0; i--) {
-            for (int j = 0; j < 10; j++) {
-                Location currentLocation = new Location(j, i);
-                String element = mapElements.getOrDefault(currentLocation, ".");
-                System.out.print(element + "  ");
+                System.out.println("User added successfully!");
+            } else {
+                System.out.println("Invalid coordinates or location already occupied.");
             }
-            System.out.println();
+
+
         }
-    }
 
-    /**
-     * Checks if the given coordinates are within the bounds of the map.
-     * @param x The x-coordinate.
-     * @param y The y-coordinate.
-     * @return True if the coordinates are within bounds, false otherwise.
-     */
-    private boolean isWithinMapBounds(int x, int y) {
-        return x >= 0 && x < 10 && y >= 0 && y < 10;
-    }
 
-    /**
-     * Gets the list of vehicles on the map.
-     * @return The list of vehicles.
-     */
-    public DoubleLinkedList<Vehicle> getVehicles() {
-        return vehicles;
+        public void addElement(MapItem element, String symbol){
+            Location location = element.GetLocation();
+            System.out.println("Adding " + element.getClass().getSimpleName() +
+                    " at map coordinates: " + location);
+
+            if (isWithinMapBounds(location.getX() - 1, location.getY() - 1)) {
+                mapElements.put(location, symbol);
+            } else {
+                System.out.println("Invalid coordinates: (" + location.getX() + ", " + location.getY() + ")");
+            }
+        }
+
+        private void removeElement (MapItem element){
+            Location location = element.GetLocation();
+            System.out.println("Removing " + element.getClass().getSimpleName() +
+                    " from map coordinates: " + location);
+
+            mapElements.remove(location);
+        }
+
+
+        /**
+         * Displays the current state of the map.
+         */
+        //DanielMoody Hi i changed this so that that is flipped  making 0,0 xy start in the bottom left corner
+        public void displayMap () {
+            for (int i = 9; i >= 0; i--) {
+                for (int j = 0; j < 10; j++) {
+                    Location currentLocation = new Location(j, i);
+                    String element = mapElements.getOrDefault(currentLocation, ".");
+                    System.out.print(element + "  ");
+                }
+                System.out.println();
+            }
+        }
+
+        /**
+         * Checks if the given coordinates are within the bounds of the map.
+         * @param x The x-coordinate.
+         * @param y The y-coordinate.
+         * @return True if the coordinates are within bounds, false otherwise.
+         */
+        private boolean isWithinMapBounds ( int X, int X){
+            return X >= 0 && X < 10 && Y >= 0 && y < 10;
+        }
+
+        /**
+         * Gets the list of vehicles on the map.
+         * @return The list of vehicles.
+         */
+        public DoubleLinkedList<Vehicle> getVehicles() {
+           return vehicles
+        }
     }
 }

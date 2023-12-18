@@ -1,10 +1,19 @@
 package main.App;
 
+<<<<<<< HEAD:src/main/App/Main.java
 import main.App.Authentication.Auth;
 import main.App.DataTypes.DoubleLinkedList;
 import main.App.DataTypes.Passenger;
 import main.App.Map.CustomMap;
 import main.App.Vehicles.Vehicle;
+=======
+import App.Authentication.Auth;
+import App.DataTypes.DoubleLinkedList;
+import App.DataTypes.Passenger;
+import App.Map.CustomMap;
+import App.Map.Location;
+import App.Vehicles.Vehicle;
+>>>>>>> ace8bf0a15169c1d3ba64c2d06ab466e98025c9b:src/main/java/App/Main.java
 
 import java.io.FileNotFoundException;
 import java.util.Objects;
@@ -91,8 +100,14 @@ public static Passenger Login(){ // passenger chose to login
         System.out.println("This is the initial map:");
         customMap.displayMap();
         AddvehicleTest();
+<<<<<<< HEAD:src/main/App/Main.java
         MoveVehicle();
         Addpassenger();
+=======
+        DoubleLinkedList<Vehicle> vehiclesInContact = getVehiclesInContactRange(user, 2);
+        //MoveVehicle();
+        AddUser();
+>>>>>>> ace8bf0a15169c1d3ba64c2d06ab466e98025c9b:src/main/java/App/Main.java
     }
     public static void AddvehicleTest(){
             // Add vehicles to the map
@@ -100,21 +115,50 @@ public static Passenger Login(){ // passenger chose to login
             // Display the updated map
             customMap.displayMap();
     }
+<<<<<<< HEAD:src/main/App/Main.java
     public static void Addpassenger(){
         System.out.println("Adding the passenger to the map.");
 
         System.out.println("Enter the initial location for the passenger (x, y):");
+=======
+
+    public static void AddUser() {
+        System.out.println("Adding the user to the map.");
+    
+        System.out.println("Enter the initial location for the user (x, y):");
+>>>>>>> ace8bf0a15169c1d3ba64c2d06ab466e98025c9b:src/main/java/App/Main.java
         System.out.print("X: ");
         int x = scanner.nextInt();
         System.out.print("Y: ");
         int y = scanner.nextInt();
+<<<<<<< HEAD:src/main/App/Main.java
 
         passenger.SetLocation(x, y);
         customMap.addElement(passenger, "U");
 
         System.out.println("passenger added to the map.");
         customMap.displayMap();
+=======
+    
+        // Use the existing user (assumed to be already signed up)
+        Passenger existingUser = user;
+    
+        if (existingUser != null) {
+            existingUser.SetLocation(x, y);
+    
+            // Add the existing user to the map with the letter "U"
+            customMap.addElement(existingUser, "U");
+    
+            System.out.println("User added to the map.");
+            customMap.displayMap();
+        } else {
+            System.out.println("User not found. Please sign up or log in first.");
+        }
+>>>>>>> ace8bf0a15169c1d3ba64c2d06ab466e98025c9b:src/main/java/App/Main.java
     }
+        
+    
+
     public static void MoveVehicle(){
         System.out.println("would like to move a vehicle? by regNumber\n1.Yes\n2.No");
         String moveByReg = scanner.next();
@@ -134,7 +178,30 @@ public static Passenger Login(){ // passenger chose to login
                     vehicle.SetLocation(x, y);
                 }
             }
+            
         customMap.displayMap();
         }
+    }
+
+    public static DoubleLinkedList<Vehicle> getVehiclesInContactRange(Passenger user, int r) {
+        Location userLocation = user.GetLocation();
+        int x = userLocation.getX();
+        int y = userLocation.getY();
+    
+        DoubleLinkedList<Vehicle> allVehicles = customMap.getVehicles();
+        DoubleLinkedList<Vehicle> vehiclesInContact = new DoubleLinkedList<>();
+    
+        for (Vehicle vehicle : allVehicles.getAll()) {
+            Location vehicleLocation = vehicle.GetLocation();
+            int vehicleX = vehicleLocation.getX();
+            int vehicleY = vehicleLocation.getY();
+    
+            // Check if the vehicle is within the square of side length 2r centered at the user's location
+            if (Math.abs(vehicleX - x) <= r && Math.abs(vehicleY - y) <= r) {
+                vehiclesInContact.add(vehicle);
+            }
+        }
+    
+        return vehiclesInContact;
     }
 }

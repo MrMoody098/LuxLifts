@@ -1,3 +1,4 @@
+
 package main.App.VehicleGenerator;
 import main.App.Map.Location;
 import main.App.DataTypes.VehicleType;
@@ -11,6 +12,14 @@ import main.App.Vehicles.Taxi.Ferrari;
 import main.App.Vehicles.Taxi.LuxuryCar;
 import main.App.Vehicles.Taxi.Porsche;
 import main.App.Vehicles.Taxi.Taxi;
+=======
+package App.VehicleGenerator;
+
+import App.Map.Location;
+import App.Vehicles.*;
+//mport App.Vehicles.Taxi.LuxuryCar;
+//import App.Vehicles.Taxi.Taxi;
+>>>>>>> ace8bf0a15169c1d3ba64c2d06ab466e98025c9b:src/main/java/App/VehicleGenerator/VehicleDataReader.java
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -42,19 +51,22 @@ public class VehicleDataReader {
             csvReader.readLine();
 
             while ((line = csvReader.readLine()) != null) {
-                String[] data = line.split(",");
-                String regNum = data[0];
-                String typeString = data[1];
-                String[] driverRatingStr = data[2].split(",");
-                double[] driverRating = new double[driverRatingStr.length];
-                double DriverAverage =getAverageDriverRating(driverRating);
-                for (int i = 0; i < driverRatingStr.length; i++) {
-                    driverRating[i] = Double.parseDouble(driverRatingStr[i]);
-                }
-                String driverName = data[3];
-                String phoneNumber = data[4];
-                int x = Integer.parseInt(data[5]);
-                int y = Integer.parseInt(data[6]);
+                
+                    String[] data = line.split(",");
+                if (data.length >= 2) {
+                    String regNum = data[0];
+                    String typeString = data[1];
+                    String[] driverRatingStr = data[2].split(",");
+                    double[] driverRating = new double[driverRatingStr.length];
+                    double DriverAverage =getAverageDriverRating(driverRating);
+                    for (int i = 0; i < driverRatingStr.length; i++) {
+                        driverRating[i] = Double.parseDouble(driverRatingStr[i]);
+                    }
+                    String driverName = data[3];
+                    String phoneNumber = data[4];
+                    int x = Integer.parseInt(data[5]);
+                    int y = Integer.parseInt(data[6]);
+                
 
                 VehicleType type;
                 switch (typeString) {
@@ -87,7 +99,8 @@ public class VehicleDataReader {
                         System.out.println(PORSCHE_OPTION + ". Porsche");
                     
                         int choice = scanner.nextInt();
-                        LuxuryCar luxuryCar;
+                        //IGNORE THIS PART FOR NOW, I'M GOING TO A WALK BUT I WANTED TO PUSH THE CODE FIRST, I WILL FIX ALL FANCY CAR RELATED STUFF 
+                        /*LuxuryCar luxuryCar;
                     
                         // Switch based on user's choice using named constants
                         switch (choice) {
@@ -106,11 +119,14 @@ public class VehicleDataReader {
                             default:
                                 // Default to Ferrari if an invalid choice is made
                                 luxuryCar = new Ferrari();
-                        }
+                        } 
                     
                         vehicleList.add(new Taxi(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y), luxuryCar));
-                        break;
+                        break; */
                     }
+                    }else{
+                    System.out.println("Invalid data format for vehicle: " + line);
+                }
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

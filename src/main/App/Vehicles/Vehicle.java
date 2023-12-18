@@ -1,9 +1,14 @@
 //package name
 package main.App.Vehicles;
 
+<<<<<<< HEAD:src/main/App/Vehicles/Vehicle.java
 import main.App.Map.Location;
 import main.App.DataTypes.VehicleType;
 import main.App.Map.MapItem;
+=======
+import App.Map.Location;
+import App.Map.MapItem;
+>>>>>>> ace8bf0a15169c1d3ba64c2d06ab466e98025c9b:src/main/java/App/Vehicles/Vehicle.java
 
 public abstract class Vehicle implements MapItem {
     private int Speed;
@@ -15,8 +20,7 @@ public abstract class Vehicle implements MapItem {
     private boolean isAvailable;
     
 
-    public Vehicle(VehicleType type, String registrationNumber, double driverRating, String driverName, String phoneNumber, Location location) {
-        this.type = type;
+    public Vehicle(VehicleType yacht, String registrationNumber, double driverRating, String driverName, String phoneNumber, Location location) {
         this.registrationNumber = registrationNumber;
         this.driverRating = driverRating;
         this.location = location;
@@ -43,6 +47,7 @@ public abstract class Vehicle implements MapItem {
     public void setType(VehicleType type) {
         this.type = type;
     }
+    
     public boolean isAvailable() {
         return isAvailable;
     }
