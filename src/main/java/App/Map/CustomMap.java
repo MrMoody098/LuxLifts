@@ -3,9 +3,9 @@ package App.Map;
 import App.DataTypes.DoubleLinkedList;
 import App.UserData.User;
 import App.VehicleGenerator.VehicleDataReader;
-import App.Vehicles.Helicopter;
+
 import App.Vehicles.Vehicle;
-import java.util.ArrayList;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,12 +21,12 @@ import static App.VehicleGenerator.VehicleDataReader.returnVehicleList;
 public class CustomMap {
     private Map<Location, String> mapElements;
     private DoubleLinkedList<Vehicle> vehicles;
-    private DoubleLinkedList<User> users;
+    
 
     public CustomMap() {
         this.mapElements = new HashMap<>();
         this.vehicles = new DoubleLinkedList<>();
-        this.users = new DoubleLinkedList<>();
+        
         initializeMap();
     }
 
@@ -71,16 +71,21 @@ public class CustomMap {
         System.out.println("Enter your y-coordinate:");
         int y = scanner.nextInt();
 
-        if (isWithinMapBounds(x, y)) {
-            grid[x - 1][y - 1] = 'V';
+        Location location = new Location(x, y);
 
-        User user = new User(username, new Location(x, y));
+        if (isWithinMapBounds(x, y) && !mapElements.containsKey(location)) {
+            User user = new User(username, location);
 
-        addElement(user, "U");
+            addElement(user, "U");
 
-        System.out.println("User added successfully!");
+            System.out.println("User added successfully!");
+        } else {
+            System.out.println("Invalid coordinates or location already occupied.");
+        }
+
+        
     }
-}
+
     
     
 
@@ -88,8 +93,8 @@ public class CustomMap {
         Location location = element.GetLocation();
         System.out.println("Adding " + element.getClass().getSimpleName() +
                 " at map coordinates: " + location);
-
-        if (isWithinMapBounds(location.getX(), location.getY())) {
+    
+        if (isWithinMapBounds(location.getX()-1, location.getY()-1)) {
             mapElements.put(location, symbol);
         } else {
             System.out.println("Invalid coordinates: (" + location.getX() + ", " + location.getY() + ")");

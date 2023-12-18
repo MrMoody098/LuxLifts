@@ -1,5 +1,6 @@
 package App.Map;
 
+import java.util.Objects;
 
 public class Location {
     private int x;
@@ -18,12 +19,23 @@ public class Location {
         return this.y;
     }
 
-    public void setX(int x) {
-        this.x = x;
+    
+     @Override
+    public boolean equals(Object obj) {
+        if (this == obj) return true;
+        if (obj == null || getClass() != obj.getClass()) return false;
+        Location location = (Location) obj;
+        return x == location.x && y == location.y;
     }
 
-    public void setY(int y) {
-        this.y = y;
+    @Override
+    public int hashCode() {
+        return Objects.hash(x, y);
+    }
+
+    @Override
+    public String toString() {
+        return "(" + x + ", " + y + ")";
     }
 }
 
