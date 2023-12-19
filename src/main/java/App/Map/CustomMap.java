@@ -32,7 +32,7 @@ public class CustomMap {
     /**
      * Initializes the map 
      */
-    private void initializeMap() throws FileNotFoundException {
+    public void initializeMap() throws FileNotFoundException {
         List<Vehicle> vehicleList = VehicleDataReader.returnVehicleList();
         for (Vehicle vehicle : vehicleList) {
             addElement(vehicle, "V");
@@ -100,8 +100,6 @@ public class CustomMap {
                 mapElements.put(location, symbol);
             System.out.println("Invalid coordinates: (" + location.getX() + ", " + location.getY() + ")");
 
-        }else{
-            System.err.println("lala");
         }
     }
 
