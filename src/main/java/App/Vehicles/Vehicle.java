@@ -3,7 +3,7 @@ package App.Vehicles;
 
 import App.Map.Location;
 import App.Map.MapItem;
-import App.Vehicles.Taxi.Taxis;
+
 
 public abstract class Vehicle implements MapItem {
     private int Speed;

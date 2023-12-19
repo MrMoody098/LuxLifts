@@ -1,7 +1,5 @@
 package App.Map;
 
-import App.DataTypes.DoubleLinkedList;
-import App.UserData.User;
 import App.VehicleGenerator.VehicleDataReader;
 
 import App.Vehicles.Vehicle;
@@ -13,7 +11,7 @@ import java.util.Scanner;
 
 import App.DataTypes.*;
 
-import static App.VehicleGenerator.VehicleDataReader.returnVehicleList;
+
 
 /**
  * CustomMap class represents a grid-based map with vehicles.
@@ -74,7 +72,7 @@ public class CustomMap {
         Location location = new Location(x, y);
 
         if (isWithinMapBounds(x, y) && !mapElements.containsKey(location)) {
-            User user = new User(username, location);
+            Passenger user = new Passenger(username, location);
 
             addElement(user, "U");
 
@@ -94,11 +92,15 @@ public class CustomMap {
         System.out.println("Adding " + element.getClass().getSimpleName() +
                 " at map coordinates: " + location);
     
-        if (isWithinMapBounds(location.getX()-1, location.getY()-1)) {
-            mapElements.put(location, symbol);
-        } else {
+        int adjustedX = location.getX() - 1;
+        int adjustedY = location.getY() - 1;
+
+        if (isWithinMapBounds(adjustedX, adjustedY)) {
+                mapElements.put(location, symbol);
             System.out.println("Invalid coordinates: (" + location.getX() + ", " + location.getY() + ")");
 
+        }else{
+            System.err.println("lala");
         }
     }
 

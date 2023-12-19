@@ -5,11 +5,10 @@ import App.DataTypes.DoubleLinkedList;
 import App.DataTypes.Passenger;
 import App.Map.CustomMap;
 import App.Map.Location;
+import App.VehicleGenerator.CsvGenerator;
 import App.Vehicles.Vehicle;
 
 import java.io.FileNotFoundException;
-import java.util.List;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -31,7 +30,9 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         // Test the Login and Signup functionality
         // Test the Map functionality
+        
         user = LoginSignupTest();
+        CsvGenerator.main(null);
         MapTest ();
 
     }

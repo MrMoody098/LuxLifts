@@ -1,6 +1,5 @@
 package App.DataTypes;
 
-import App.Vehicles.Vehicle;
 
 public class Node<T> {
     public T data;

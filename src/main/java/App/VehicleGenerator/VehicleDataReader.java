@@ -48,8 +48,10 @@ public class VehicleDataReader {
                     }
                     String driverName = data[3];
                     String phoneNumber = data[4];
-                    int x = Integer.parseInt(data[5]);
-                    int y = Integer.parseInt(data[6]);
+                    int x = Integer.parseInt(data[5]) - 1;
+                    int y = Integer.parseInt(data[6]) - 1;
+
+                
                 
 
                 VehicleType type;

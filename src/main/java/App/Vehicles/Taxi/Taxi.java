@@ -1,13 +1,10 @@
 package App.Vehicles.Taxi;
 
 import App.Map.Location;
-import App.Map.MapItem;
-//import App.Vehicles.LandVehicle;
+
 import App.Vehicles.Type;
 import App.Vehicles.Vehicle;
-import App.Vehicles.VehicleType;
 
-import java.util.Scanner;
 
 public class Taxi extends Vehicle implements Type {
     private Taxis taxiType;
