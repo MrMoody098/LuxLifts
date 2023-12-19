@@ -6,6 +6,7 @@ import java.util.Random;
 
 import App.DataTypes.DefaultTaxiTypeList;
 import App.DataTypes.TaxiTypeList;
+import App.Vehicles.Taxi.Taxis;
 
 public class CsvGenerator {
 
@@ -39,18 +40,21 @@ public class CsvGenerator {
         }
     }
 
+    
     private static String getRandomVehicleType() {
         String[] allVehicleTypes = {"LIMO", "HELICOPTER", "PRIVATE_JET", "YACHT", "TAXI"};
         String type = allVehicleTypes[new Random().nextInt(allVehicleTypes.length)];
 
-        // For taxi, choose subcategory dynamically
+    
         if ("TAXI".equals(type)) {
-            TaxiTypeList taxiTypeList = new DefaultTaxiTypeList();
-            type = taxiTypeList.getRandomTaxiType();
+            DefaultTaxiTypeList taxiTypeList = new DefaultTaxiTypeList();
+            Taxis randomTaxiType = Taxis.valueOf(taxiTypeList.getRandomTaxiType());
+            type = randomTaxiType.toString();
         }
 
         return type;
     }
+
 
     private static String generateRegistrationNumber() {
         // Generate a random registration number
@@ -83,7 +87,7 @@ public class CsvGenerator {
     }
 
     private static int[] generateLocation() {
-        // Generate random x, y coordinates within the bounds of a 10x10 grid
+        // Generate random x, y coordinates within the bounds of a 10x10 map
         int x = new Random().nextInt(10);
         int y = new Random().nextInt(10);
         return new int[]{x, y};

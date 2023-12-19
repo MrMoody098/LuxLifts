@@ -12,12 +12,6 @@
   </properties>
 
   <dependencies>
-      <dependency>
-          <groupId>org.apache.maven.plugins</groupId>
-          <artifactId>maven-dependency-plugin</artifactId>
-          <version>3.8.1</version>
-          <type>maven-plugin</type>
-      </dependency>
     <dependency>
       <groupId>org.jline</groupId>
       <artifactId>jline</artifactId>

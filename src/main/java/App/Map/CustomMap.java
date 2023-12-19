@@ -1,8 +1,9 @@
 package App.Map;
 
 import App.VehicleGenerator.VehicleDataReader;
-
+import App.Vehicles.Helicopter;
 import App.Vehicles.Vehicle;
+
 
 import java.io.FileNotFoundException;
 import java.util.HashMap;
@@ -26,7 +27,7 @@ public class CustomMap {
         this.mapElements = new HashMap<>();
         this.vehicles = new DoubleLinkedList<>();
         
-        initializeMap();
+        
     }
 
     /**
@@ -57,6 +58,7 @@ public class CustomMap {
             }
         }
     }
+
     
     public void addUser() {
         Scanner scanner = new Scanner(System.in);
@@ -93,13 +95,13 @@ public class CustomMap {
         System.out.println("Adding " + element.getClass().getSimpleName() +
                 " at map coordinates: " + location);
     
-        int adjustedX = location.getX() - 1;
-        int adjustedY = location.getY() - 1;
+        int adjustedX = location.getX();
+        int adjustedY = location.getY();
 
         if (isWithinMapBounds(adjustedX, adjustedY)) {
-                mapElements.put(location, symbol);
+            mapElements.put(location, symbol);
+        } else {
             System.out.println("Invalid coordinates: (" + location.getX() + ", " + location.getY() + ")");
-
         }
     }
 
@@ -130,9 +132,19 @@ public class CustomMap {
             }
         }
         return vehiclesInContact;
+        
     }
 
-    
+    public void firstMap() {
+        for (int i = 9; i >= 0; i--) {
+            for (int j = 0; j < 10; j++) {
+                Location currentLocation = new Location(j, i);
+                String element = mapElements.getOrDefault(currentLocation, ".");  // Default to "." if no element at the location
+                System.out.print(element + "   ");
+            }
+            System.out.println();
+        }
+    }
 
     /**
      * Displays the current state of the map.
@@ -143,11 +155,20 @@ public class CustomMap {
             for (int j = 0; j < 10; j++) {
                 Location currentLocation = new Location(j, i);
                 String element = mapElements.getOrDefault(currentLocation, ".");
-                System.out.print(element + "  ");
+    
+                // Check if there's a vehicle at the current location and update the symbol
+                for (Vehicle vehicle : vehicles.getAll()) {
+                    if (vehicle.GetLocation().equals(currentLocation)) {
+                        element = "V";
+                    }
+                }
+    
+                System.out.print(element + "   ");
             }
             System.out.println();
         }
     }
+    
 
     /**
      * Checks if the given coordinates are within the bounds of the map.

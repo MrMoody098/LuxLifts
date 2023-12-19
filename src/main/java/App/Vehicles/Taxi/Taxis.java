@@ -1,8 +1,8 @@
 package App.Vehicles.Taxi;
 
 public enum Taxis {
-    Bugatti,
-    Bentley,
-    Ferrari,
-    Porsche
+    BUGATTI,
+    BENTLEY,
+    FERRARI,
+    PORSCHE
 }

@@ -4,10 +4,8 @@ import App.Authentication.Auth;
 import App.DataTypes.DoubleLinkedList;
 import App.DataTypes.Passenger;
 import App.Map.CustomMap;
-import App.Map.Location;
 import App.VehicleGenerator.CsvGenerator;
 import App.Vehicles.Vehicle;
-
 import java.io.FileNotFoundException;
 import java.util.Objects;
 import java.util.Scanner;
@@ -41,12 +39,16 @@ public class Main {
     public static void main(String[] args) throws FileNotFoundException {
         // Test the Login and Signup functionality
         // Test the Map functionality
-        
-        user = LoginSignupTest();
-        CsvGenerator.main(null);
         MapTest ();
+        //user = LoginSignupTest();
+        //CsvGenerator.main(null);
+        
+        //customMap.manuallyAddVehicles();
+        //customMap.displayMap();
 
     }
+
+
 
     /**
      * Method to test the Login and Signup functionality.
@@ -86,41 +88,59 @@ public class Main {
         // Attempt to signup using Auth class
         return Auth.signup(username,password);
     }
-public static Passenger Login(){ // User chose to login
-    System.out.println("Username:");
-    String username = scanner.next();
+    public static Passenger Login(){ // User chose to login
+        System.out.println("Username:");
+        String username = scanner.next();
 
-    System.out.println("Password:");
-    String password = scanner.next();
+        System.out.println("Password:");
+        String password = scanner.next();
 
-    // Attempt to login using Auth class
-    return Auth.login(username,password);
+        // Attempt to login using Auth class
+        return Auth.login(username,password);
     }
     /**
      * Method to test the Map functionality.
      */
     public static void MapTest() throws FileNotFoundException {
-        //we need to also add the user to this map
+        
+        System.out.println("This is the initial map:\n");
+        customMap.firstMap();
 
-        // Create a CustomMap object
-        System.out.println("This is the initial map:");
-        customMap.displayMap();
-        AddvehicleTest();
-        DoubleLinkedList<Vehicle> vehiclesInContact = customMap.getVehiclesInContactRange(user, 2);
-        //MoveVehicle();
+        System.out.println("Do you want to see vehicles on the map?");
+        String input = scanner.nextLine();
+        if (input.equalsIgnoreCase("yes")){
+            System.out.println("Please first Login/Signup");
+            user = LoginSignupTest();
+            customMap.initializeMap();
+        }else{
+            System.out.println("see ya later aligator");
+        }
+        
+
+        
         AddUser();
+
+        DoubleLinkedList<Vehicle> vehiclesInContact = customMap.getVehiclesInContactRange(user, 2);
+        System.out.println("Vehicles in contact range:");
+        if (vehiclesInContact.size()==0){
+                System.out.println("no vehicles sorry bestie");
+            }else{
+                for (Vehicle vehicle : vehiclesInContact.getAll()) {
+                    System.out.println(vehicle); 
+                }
+        }
     }
     public static void AddvehicleTest() throws FileNotFoundException {
             // Add vehicles to the map
             customMap.addVehicles();
-            // Display the updated map
-            customMap.displayMap();
+            customMap.displayMap();;
+            
     }
 
     public static void AddUser() {
-        System.out.println("Adding the user to the map.");
+        System.out.println("ADDING THE USER TO THE MAP.\n");
     
-        System.out.println("Enter the initial location for the user (x, y):");
+        System.out.println("Enter the initial location where you would like to picked up (x, y):");
         System.out.print("X: ");
         int x = scanner.nextInt();
         System.out.print("Y: ");

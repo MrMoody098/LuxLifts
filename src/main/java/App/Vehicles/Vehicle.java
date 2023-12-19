@@ -79,5 +79,12 @@ public abstract class Vehicle implements MapItem {
         int CurrentY = location.getY();
         return SetLocation(CurrentX + x, CurrentY + y);
     }
+    @Override
+    public String toString() {
+        return "Vehicle type: " + this.getClass().getSimpleName() +
+            ", Registration Number: " + getRegistrationNumber() +
+            ", Driver Rating: " + getDriverRating() +
+            ", Location: " + GetLocation();
+    }
 }
 

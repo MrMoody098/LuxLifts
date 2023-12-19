@@ -15,23 +15,25 @@ public class Taxi extends LandVehicle {
         this.taxiType = taxiType;
 
         switch (taxiType) {
-            case Bugatti:
-                setTaxiType(Taxis.Bugatti);
+            case BUGATTI:
+                setTaxiType(Taxis.BUGATTI);
                 break;
-            case Bentley:
-                setTaxiType(Taxis.Bentley);
+            case BENTLEY:
+                setTaxiType(Taxis.BENTLEY);
                 break;
-            case Ferrari:
-                setTaxiType(Taxis.Ferrari);
+            case FERRARI:
+                setTaxiType(Taxis.FERRARI);
                 break;
-            case Porsche:
-                setTaxiType(Taxis.Porsche);
+            case PORSCHE:
+                setTaxiType(Taxis.PORSCHE);
                 break;
             default:
                 // Default to Ferrari if an invalid choice is made
-                setTaxiType(Taxis.Ferrari);
+                setTaxiType(Taxis.FERRARI);
         }
     }
+
+    
 
     public Taxis getTaxiType() {
         return taxiType;
