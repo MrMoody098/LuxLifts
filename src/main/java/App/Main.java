@@ -9,6 +9,7 @@ import App.VehicleGenerator.CsvGenerator;
 import App.Vehicles.Vehicle;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -22,7 +23,7 @@ public class Main {
     static {
         try {
             customMap = new CustomMap();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new RuntimeException(e);
         }
     }
@@ -38,7 +39,7 @@ public class Main {
      * @param args Command-line arguments (not used in this program).
      * @throws FileNotFoundException If a file required for the program is not found.
      */
-    public static void main(String[] args) throws FileNotFoundException {
+    public static void main(String[] args) throws IOException {
         // Test the Login and Signup functionality
         // Test the Map functionality
         
@@ -99,7 +100,7 @@ public static Passenger Login(){ // User chose to login
     /**
      * Method to test the Map functionality.
      */
-    public static void MapTest() throws FileNotFoundException {
+    public static void MapTest() throws IOException {
         //we need to also add the user to this map
 
         // Create a CustomMap object
@@ -110,7 +111,7 @@ public static Passenger Login(){ // User chose to login
         //MoveVehicle();
         AddUser();
     }
-    public static void AddvehicleTest() throws FileNotFoundException {
+    public static void AddvehicleTest() throws IOException {
             // Add vehicles to the map
             customMap.addVehicles();
             // Display the updated map

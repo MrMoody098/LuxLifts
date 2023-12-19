@@ -5,10 +5,8 @@ import App.VehicleGenerator.VehicleDataReader;
 import App.Vehicles.Vehicle;
 
 import java.io.FileNotFoundException;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.io.IOException;
+import java.util.*;
 
 import App.DataTypes.*;
 
@@ -20,9 +18,10 @@ import App.DataTypes.*;
 public class CustomMap {
     private Map<Location, String> mapElements;
     private DoubleLinkedList<Vehicle> vehicles;
-    
+    private List<Location> MapLocations;
 
-    public CustomMap() throws FileNotFoundException {
+
+    public CustomMap() throws IOException {
         this.mapElements = new HashMap<>();
         this.vehicles = new DoubleLinkedList<>();
         
@@ -32,7 +31,7 @@ public class CustomMap {
     /**
      * Initializes the map 
      */
-    public void initializeMap() throws FileNotFoundException {
+    public void initializeMap() throws IOException {
         List<Vehicle> vehicleList = VehicleDataReader.returnVehicleList();
         for (Vehicle vehicle : vehicleList) {
             addElement(vehicle, "V");
@@ -43,7 +42,7 @@ public class CustomMap {
     /**
      * Adds vehicles to the map based on user input.
      */
-    public void addVehicles() throws FileNotFoundException {
+    public void addVehicles() throws IOException {
         System.out.println("Vehicles added successfully!");
         List<Vehicle> returnedList = VehicleDataReader.returnVehicleList();
 

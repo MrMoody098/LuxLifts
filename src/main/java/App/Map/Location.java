@@ -5,12 +5,19 @@ import java.util.Objects;
 public class Location {
     private int x;
     private int y;
+    public String name;
 
     public Location(int x, int y) {
         this.x = x;
         this.y = y;
-    }
 
+    }
+    public Location(int x,int y,String name){
+        this.x = x;
+        this.y = y;
+        this.name = name;
+    }
+    public String getName(){return name;}
     public int getX() {
         return this.x;
     }
