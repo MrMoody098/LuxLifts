@@ -12,7 +12,7 @@ public class CsvGenerator {
     
 
     public static void main(String[] args) {
-        String csvFilePath = "/Users/miaborko/LuxLifts/LuxLifts/src/main/java/App/VehicleGenerator/Vehicles.csv";
+        String csvFilePath = "LuxLifts/src/main/App/VehicleGenerator/Vehicles.csv";
 
         try (FileWriter csvWriter = new FileWriter(csvFilePath)) {
             // Write header to the CSV file

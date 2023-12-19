@@ -1,26 +1,10 @@
 
 package main.App.VehicleGenerator;
 import main.App.Map.Location;
-import main.App.DataTypes.VehicleType;
 import main.App.Vehicles.*;
 import main.App.Vehicles.AirVehicles.Helicopter;
 import main.App.Vehicles.AirVehicles.PrivateJet;
 import main.App.Vehicles.Limo.Limo;
-import main.App.Vehicles.Taxi.Bentley;
-import main.App.Vehicles.Taxi.Bugatti;
-import main.App.Vehicles.Taxi.Ferrari;
-import main.App.Vehicles.Taxi.LuxuryCar;
-import main.App.Vehicles.Taxi.Porsche;
-import main.App.Vehicles.Taxi.Taxi;
-=======
-package App.VehicleGenerator;
-
-import App.Map.Location;
-import App.Vehicles.*;
-//mport App.Vehicles.Taxi.LuxuryCar;
-//import App.Vehicles.Taxi.Taxi;
->>>>>>> ace8bf0a15169c1d3ba64c2d06ab466e98025c9b:src/main/java/App/VehicleGenerator/VehicleDataReader.java
-
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -66,9 +50,6 @@ public class VehicleDataReader {
                     String phoneNumber = data[4];
                     int x = Integer.parseInt(data[5]);
                     int y = Integer.parseInt(data[6]);
-                
-
-                VehicleType type;
                 switch (typeString) {
                     case "Limo":
                         vehicleList.add(new Limo(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y)));
