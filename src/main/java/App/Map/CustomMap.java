@@ -4,6 +4,7 @@ import App.VehicleGenerator.VehicleDataReader;
 
 import App.Vehicles.Vehicle;
 
+import java.io.FileNotFoundException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -21,7 +22,7 @@ public class CustomMap {
     private DoubleLinkedList<Vehicle> vehicles;
     
 
-    public CustomMap() {
+    public CustomMap() throws FileNotFoundException {
         this.mapElements = new HashMap<>();
         this.vehicles = new DoubleLinkedList<>();
         
@@ -31,7 +32,7 @@ public class CustomMap {
     /**
      * Initializes the map 
      */
-    private void initializeMap() {
+    private void initializeMap() throws FileNotFoundException {
         List<Vehicle> vehicleList = VehicleDataReader.returnVehicleList();
         for (Vehicle vehicle : vehicleList) {
             addElement(vehicle, "V");
@@ -42,7 +43,7 @@ public class CustomMap {
     /**
      * Adds vehicles to the map based on user input.
      */
-    public void addVehicles() {
+    public void addVehicles() throws FileNotFoundException {
         System.out.println("Vehicles added successfully!");
         List<Vehicle> returnedList = VehicleDataReader.returnVehicleList();
 
@@ -111,8 +112,27 @@ public class CustomMap {
 
         mapElements.remove(location);
     }
-    
-    
+
+    public DoubleLinkedList<Vehicle> getVehiclesInContactRange(Passenger user, int r) {
+        Location userLocation = user.GetLocation();
+        int x = userLocation.getX();
+        int y = userLocation.getY();
+
+        DoubleLinkedList<Vehicle> allVehicles = getVehicles();
+        DoubleLinkedList<Vehicle> vehiclesInContact = new DoubleLinkedList<>();
+
+        for (Vehicle vehicle : allVehicles.getAll()) {
+            Location vehicleLocation = vehicle.GetLocation();
+            int vehicleX = vehicleLocation.getX();
+            int vehicleY = vehicleLocation.getY();
+
+            // Check if the vehicle is within the square of side length 2r centered at the user's location
+            if (Math.abs(vehicleX - x) <= r && Math.abs(vehicleY - y) <= r) {
+                vehiclesInContact.add(vehicle);
+            }
+        }
+        return vehiclesInContact;
+    }
 
     
 

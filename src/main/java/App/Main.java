@@ -17,10 +17,21 @@ import java.util.Scanner;
  */
 public class Main {
     private static Passenger user;
-    public static CustomMap customMap = new CustomMap();
+    public static CustomMap customMap;
+
+    static {
+        try {
+            customMap = new CustomMap();
+        } catch (FileNotFoundException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     // Scanner object for user input
     public static Scanner scanner = new Scanner(System.in);
+
+    public Main() throws FileNotFoundException {
+    }
 
     /**
      * The main method to run the program.
@@ -88,18 +99,18 @@ public static Passenger Login(){ // User chose to login
     /**
      * Method to test the Map functionality.
      */
-    public static void MapTest() {
+    public static void MapTest() throws FileNotFoundException {
         //we need to also add the user to this map
 
         // Create a CustomMap object
         System.out.println("This is the initial map:");
         customMap.displayMap();
         AddvehicleTest();
-        DoubleLinkedList<Vehicle> vehiclesInContact = getVehiclesInContactRange(user, 2);
+        DoubleLinkedList<Vehicle> vehiclesInContact = customMap.getVehiclesInContactRange(user, 2);
         //MoveVehicle();
         AddUser();
     }
-    public static void AddvehicleTest(){
+    public static void AddvehicleTest() throws FileNotFoundException {
             // Add vehicles to the map
             customMap.addVehicles();
             // Display the updated map
@@ -155,27 +166,5 @@ public static Passenger Login(){ // User chose to login
             
         customMap.displayMap();
         }
-    }
-
-    public static DoubleLinkedList<Vehicle> getVehiclesInContactRange(Passenger user, int r) {
-        Location userLocation = user.GetLocation();
-        int x = userLocation.getX();
-        int y = userLocation.getY();
-    
-        DoubleLinkedList<Vehicle> allVehicles = customMap.getVehicles();
-        DoubleLinkedList<Vehicle> vehiclesInContact = new DoubleLinkedList<>();
-    
-        for (Vehicle vehicle : allVehicles.getAll()) {
-            Location vehicleLocation = vehicle.GetLocation();
-            int vehicleX = vehicleLocation.getX();
-            int vehicleY = vehicleLocation.getY();
-    
-            // Check if the vehicle is within the square of side length 2r centered at the user's location
-            if (Math.abs(vehicleX - x) <= r && Math.abs(vehicleY - y) <= r) {
-                vehiclesInContact.add(vehicle);
-            }
-        }
-    
-        return vehiclesInContact;
     }
 }

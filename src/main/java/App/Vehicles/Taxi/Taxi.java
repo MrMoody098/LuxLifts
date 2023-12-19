@@ -2,10 +2,12 @@ package App.Vehicles.Taxi;
 
 import App.Map.Location;
 
+import App.Map.MapItem;
+import App.Vehicles.Types.LandVehicle;
 import App.Vehicles.Vehicle;
 
 
-public class Taxi extends Vehicle implements Type {
+public class Taxi extends LandVehicle {
     private Taxis taxiType;
 
     public Taxi(Taxis taxiType, String registrationNumber, double driverRating, String driverName, String phoneNumber, Location location) {
@@ -39,29 +41,6 @@ public class Taxi extends Vehicle implements Type {
         this.taxiType = taxiType;
     }
 
-    @Override
-    public void drive() {
-    
-    }
 
 
-    @Override
-    public void fly() {
-        
-    }
-
-    @Override
-    public void land() {
-       
-    }
-
-    @Override
-    public void sail() {
-        
-    }
-
-    @Override
-    public boolean MoveTo(Location destination) {
-        return false;
-    }
 }

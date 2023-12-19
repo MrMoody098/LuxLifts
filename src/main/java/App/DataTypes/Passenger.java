@@ -1,5 +1,6 @@
 package App.DataTypes;
 
+import App.Map.CustomMap;
 import App.Map.Location;
 import App.Map.MapItem;
 
@@ -34,8 +35,10 @@ public class Passenger implements MapItem {
     }
 
     @Override
-    public boolean MoveTo(Location destination) {
-        return false;
+    public Location MoveTo(Location destination, CustomMap customMap) {
+        SetLocation(destination.getX(),destination.getY());
+        return GetLocation();
     }
+
 }
 

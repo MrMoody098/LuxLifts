@@ -17,16 +17,16 @@ public class VehicleDataReader {
     private static String csvFilePath = "LuxLifts/src/main/java/App/VehicleGenerator/Vehicles.csv";
     private static Scanner scanner = new Scanner(System.in);
 
-        public static double getAverageDriverRating(double[] driverRating) {
-            // Calculate the average driver rating
-            double sum = 0;
-            for (double rating : driverRating) {
-                sum += rating;
-            }
-            return sum / driverRating.length;
+    public static double getAverageDriverRating(double[] driverRating) {
+        // Calculate the average driver rating
+        double sum = 0;
+        for (double rating : driverRating) {
+            sum += rating;
         }
+        return sum / driverRating.length;
+    }
 
-    public static List<Vehicle> returnVehicleList() {
+    public static List<Vehicle> returnVehicleList() throws FileNotFoundException {
         List<Vehicle> vehicleList = new ArrayList<>();
 
         try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFilePath))) {
@@ -35,14 +35,14 @@ public class VehicleDataReader {
             csvReader.readLine();
 
             while ((line = csvReader.readLine()) != null) {
-                
-                    String[] data = line.split(",");
+
+                String[] data = line.split(",");
                 if (data.length >= 2) {
                     String regNum = data[0];
                     String typeString = data[1];
                     String[] driverRatingStr = data[2].split(",");
                     double[] driverRating = new double[driverRatingStr.length];
-                    double DriverAverage =getAverageDriverRating(driverRating);
+                    double DriverAverage = getAverageDriverRating(driverRating);
                     for (int i = 0; i < driverRatingStr.length; i++) {
                         driverRating[i] = Double.parseDouble(driverRatingStr[i]);
                     }
@@ -50,9 +50,16 @@ public class VehicleDataReader {
                     String phoneNumber = data[4];
                     int x = Integer.parseInt(data[5]) - 1;
                     int y = Integer.parseInt(data[6]) - 1;
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return vehicleList;
+    }
+}
 
-                
-                
+
 //
 //                VehicleType type;
 //                switch (typeString) {
@@ -71,16 +78,3 @@ public class VehicleDataReader {
 //                    case "Taxi":
 //                        // For the taxi, allow the user to choose a luxury car
 //                        System.out.println("Choose a luxury car for the taxi:");
-
-            }
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
-        return vehicleList;
-    }
-
-
-}
-
