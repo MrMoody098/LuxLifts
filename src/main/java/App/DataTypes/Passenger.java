@@ -32,5 +32,10 @@ public class Passenger implements MapItem {
         int CurrentY = location.getY();
         return SetLocation(CurrentX + x, CurrentY + y);
     }
+
+    @Override
+    public boolean MoveTo(Location destination) {
+        return false;
+    }
 }
 

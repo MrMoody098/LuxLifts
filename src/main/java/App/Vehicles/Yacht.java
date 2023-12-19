@@ -29,4 +29,9 @@ public class Yacht extends Vehicle implements Type,MapItem {
     public void land() {
         
     }
+
+    @Override
+    public boolean MoveTo(Location destination) {
+        return false;
+    }
 }

@@ -7,5 +7,6 @@ public interface MapItem {
     public Location GetLocation();
 
     public Location UpdateLocation(int x,int y);
+    public boolean MoveTo(Location destination);
 
 }

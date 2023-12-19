@@ -28,4 +28,9 @@ public class Helicopter extends Vehicle implements Type {
     public void sail() {
         
     }
+
+    @Override
+    public boolean MoveTo(Location destination) {
+        return false;
+    }
 }

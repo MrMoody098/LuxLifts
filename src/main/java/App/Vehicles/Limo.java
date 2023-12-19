@@ -24,4 +24,9 @@ public class Limo extends Vehicle implements Type, MapItem {
     public void sail() {
         
     }
+
+    @Override
+    public boolean MoveTo(Location destination) {
+        return false;
+    }
 }

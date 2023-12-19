@@ -2,7 +2,6 @@ package App.Vehicles.Taxi;
 
 import App.Map.Location;
 
-import App.Vehicles.Type;
 import App.Vehicles.Vehicle;
 
 
@@ -59,5 +58,10 @@ public class Taxi extends Vehicle implements Type {
     @Override
     public void sail() {
         
+    }
+
+    @Override
+    public boolean MoveTo(Location destination) {
+        return false;
     }
 }

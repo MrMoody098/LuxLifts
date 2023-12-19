@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.Scanner;
 
 public class VehicleDataReader {
-    private static String csvFilePath = "/Users/miaborko/LuxLifts/LuxLifts/src/main/java/App/VehicleGenerator/Vehicles.csv";
+    private static String csvFilePath = "LuxLifts/src/main/java/App/VehicleGenerator/Vehicles.csv";
     private static Scanner scanner = new Scanner(System.in);
 
         public static double getAverageDriverRating(double[] driverRating) {
@@ -53,66 +53,25 @@ public class VehicleDataReader {
 
                 
                 
+//
+//                VehicleType type;
+//                switch (typeString) {
+//                    case "Limo":
+//                        vehicleList.add(new Limo(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y)));
+//                        break;
+//                    case "Helicopter":
+//                        vehicleList.add(new Helicopter(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y)));
+//                        break;
+//                    case "PrivateJet":
+//                        vehicleList.add(new PrivateJet(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y)));
+//                        break;
+//                    case "Yacht":
+//                        vehicleList.add(new Yacht(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y)));
+//                        break;
+//                    case "Taxi":
+//                        // For the taxi, allow the user to choose a luxury car
+//                        System.out.println("Choose a luxury car for the taxi:");
 
-                VehicleType type;
-                switch (typeString) {
-                    case "Limo":
-                        vehicleList.add(new Limo(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y)));
-                        break;
-                    case "Helicopter":
-                        vehicleList.add(new Helicopter(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y)));
-                        break;
-                    case "PrivateJet":
-                        vehicleList.add(new PrivateJet(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y)));
-                        break;
-                    case "Yacht":
-                        vehicleList.add(new Yacht(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y)));
-                        break;
-                    case "Taxi":
-                        // For the taxi, allow the user to choose a luxury car
-                        System.out.println("Choose a luxury car for the taxi:");
-                    
-                        // Define named constants for luxury car options
-                        final int FERRARI_OPTION = 1;
-                        final int BUGATTI_OPTION = 2;
-                        final int BENTLEY_OPTION = 3;
-                        final int PORSCHE_OPTION = 4;
-                    
-                        // Print the available luxury car options
-                        System.out.println(FERRARI_OPTION + ". Ferrari");
-                        System.out.println(BUGATTI_OPTION + ". Bugatti");
-                        System.out.println(BENTLEY_OPTION + ". Bentley");
-                        System.out.println(PORSCHE_OPTION + ". Porsche");
-                    
-                        int choice = scanner.nextInt();
-                        //IGNORE THIS PART FOR NOW, I'M GOING TO A WALK BUT I WANTED TO PUSH THE CODE FIRST, I WILL FIX ALL FANCY CAR RELATED STUFF 
-                        /*LuxuryCar luxuryCar;
-                    
-                        // Switch based on user's choice using named constants
-                        switch (choice) {
-                            case FERRARI_OPTION:
-                                luxuryCar = new Ferrari();
-                                break;
-                            case BUGATTI_OPTION:
-                                luxuryCar = new Bugatti();
-                                break;
-                            case BENTLEY_OPTION:
-                                luxuryCar = new Bentley();
-                                break;
-                            case PORSCHE_OPTION:
-                                luxuryCar = new Porsche();
-                                break;
-                            default:
-                                // Default to Ferrari if an invalid choice is made
-                                luxuryCar = new Ferrari();
-                        } 
-                    
-                        vehicleList.add(new Taxi(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y), luxuryCar));
-                        break; */
-                    }
-                    }else{
-                    System.out.println("Invalid data format for vehicle: " + line);
-                }
             }
         } catch (FileNotFoundException e) {
             throw new RuntimeException(e);

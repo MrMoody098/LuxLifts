@@ -7,29 +7,10 @@ public class PrivateJet extends Vehicle implements Type {
     public PrivateJet(String registrationNumber, double driverRating, String driverName, String phoneNumber, Location location) {
         super(registrationNumber, driverRating, driverName, phoneNumber, location);
         this.setType(VehicleType.PRIVATE_JET);
-        
-    }
-
-
-    @Override
-    public void fly() {
-
     }
 
     @Override
-    public void land() {
-
-    }
-
-
-    @Override
-    public void drive() {
-        
-    }
-
-
-    @Override
-    public void sail() {
-        
+    public boolean MoveTo(Location destination) {
+        return false;
     }
 }
