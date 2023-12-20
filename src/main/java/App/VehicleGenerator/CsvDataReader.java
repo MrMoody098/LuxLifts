@@ -11,6 +11,7 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Scanner;
 
@@ -124,16 +125,16 @@ public class CsvDataReader {
                     int y = Integer.parseInt(data[6]) - 1;
 
                     switch (typeString) {
-                        case "Limo":
+                        case "LIMO":
                             vehicleList.add(new Limo(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y)));
                             break;
-                        case "Helicopter":
+                        case "HELICOPTER":
                             vehicleList.add(new Helicopter(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y)));
                             break;
-                        case "PrivateJet":
+                        case "PRIVATE_JET":
                             vehicleList.add(new PrivateJet(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y)));
                             break;
-                        case "Yacht":
+                        case "YACHT":
                             vehicleList.add(new Yacht(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y)));
                             break;
                     }

@@ -7,14 +7,14 @@ import App.Map.MapItems.MapItem;
 import java.io.FileNotFoundException;
 
 public class MapLocation  implements MapItem {
-    public Location location;
-    public String name;
-    public MapLocation(Location location,String Name){
+    private Location location;
+    private String name;
+    public MapLocation(Location location,String name){
         this.location = location;
         this.name = name;
     }
     public String getName() {
-        return name;
+        return this.name;
     }
 
     public void setName(String name) {

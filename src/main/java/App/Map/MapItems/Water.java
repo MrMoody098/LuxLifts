@@ -7,18 +7,9 @@ import java.io.FileNotFoundException;
 
 public class Water implements MapItem {
     public Location location;
-    public String name;
 
     public Water(Location location) {
         this.location = location;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 
     @Override

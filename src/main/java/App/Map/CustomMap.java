@@ -69,7 +69,7 @@ public class CustomMap {
 
         for (Vehicle vehicle : returnedList) {
 //            if (isWithinMapBounds(vehicle.GetLocation().getX(), vehicle.GetLocation().getY())) {
-                Vehicles.add(vehicle);
+            Vehicles.add(vehicle);
                 addElement(vehicle, "V");
            // } else {
 //                System.out.println("Invalid coordinates for vehicle: (" +
@@ -107,8 +107,8 @@ public class CustomMap {
 
     public void addElement(MapItem element, String symbol) {
         Location location = element.GetLocation();
-        System.out.println("Adding " + element.getClass().getSimpleName() +
-                " at map coordinates: " + location);
+//        System.out.println("Adding " + element.getClass().getSimpleName() +
+//                " at map coordinates: " + location);
                 mapElements.put(location, symbol);
     }
 
