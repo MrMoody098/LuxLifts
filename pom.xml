@@ -12,8 +12,6 @@
   </properties>
 
   <dependencies>
-    
-    
     <dependency>
       <groupId>org.jline</groupId>
       <artifactId>jline</artifactId>
