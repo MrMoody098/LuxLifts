@@ -12,6 +12,7 @@ public interface VehicleHiringTest {
         // Update the location of the vehicle with the specified reg number to location loc if vehicle exists and return true.
 //Return false if vehicle not registered or has not been added to the map
         public abstract boolean testMoveVehicle(String reg, Location loc);
+
         // Remove the vehicle with the specified reg number from the map if it is registered and return true.
 // If vehicle is not registered or is not on map the method returns false.
         public abstract boolean testRemoveVehicle(String reg);

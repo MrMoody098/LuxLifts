@@ -16,8 +16,8 @@ public class CsvGenerator {
             // Write header to the CSV file
             csvWriter.append("RegistrationNumber,Type,DriverRating,DriverName,PhoneNumber,Location\n");
 
-            // Generate 20 entries
-            for (int i = 0; i < 20; i++) {
+            // Generate 10 entries
+            for (int i = 0; i < 10; i++) {
                 String type = getRandomVehicleType();
                 String regNum = generateRegistrationNumber();
                 String driverRating = generateDriverRating(); // Updated to return a String

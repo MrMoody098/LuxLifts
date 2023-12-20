@@ -45,7 +45,6 @@ public class Main implements VehicleHiringTest{
         // Test the Map functionality
 
         user = LoginSignupTest();
-        CsvGenerator.main(null);
         MapTest ();
 
     }
@@ -80,7 +79,7 @@ public class Main implements VehicleHiringTest{
     }
 
     public static Passenger SignUp() throws FileNotFoundException {// passenger chose to signup
-        System.out.println("passengername:");
+        System.out.println("username2:");
         String passengername = scanner.next();
         System.out.println("Password:");
         String password = scanner.next();
@@ -159,7 +158,7 @@ public static Passenger Login(){ // passenger chose to login
         
     
 
-    public static void MoveVehicle(){
+    public static void MoveVehicle() throws IOException {
         System.out.println("would like to move a vehicle? by regNumber\n1.Yes\n2.No");
         String moveByReg = scanner.next();
         if(moveByReg.equalsIgnoreCase("yes")||moveByReg.equals("1")){
@@ -178,7 +177,7 @@ public static Passenger Login(){ // passenger chose to login
                     vehicle.SetLocation(x, y);
                 }
             }
-            
+            customMap.initializeMap();
         customMap.displayMap();
         }
     }
