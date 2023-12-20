@@ -10,7 +10,7 @@ public class CsvGenerator {
 
     public static void main(String[] args) {
 
-        String csvFilePath = "LuxLifts/src/main/App/VehicleGenerator/Vehicles.csv";
+        String csvFilePath = "LuxLifts/src/main/java/App/VehicleGenerator/Vehicles.csv";
 
         try (FileWriter csvWriter = new FileWriter(csvFilePath)) {
             // Write header to the CSV file
@@ -55,7 +55,7 @@ public class CsvGenerator {
 
         for (int i = 0; i < 4; i++) {
             // Generate a random double between 1 and 5 (adjust the range as needed)
-            double randomRating = 1 + (5 - 1) * random.nextDouble();
+            int randomRating = random.nextInt(5);
 
             // Append the random rating to the StringBuilder
             ratingStringBuilder.append(randomRating);

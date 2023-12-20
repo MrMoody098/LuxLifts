@@ -1,10 +1,13 @@
 package App.Map;
 
-import App.VehicleGenerator.VehicleDataReader;
+import App.Map.MapItems.HeliPad;
+import App.Map.MapItems.MapItem;
+import App.Map.MapItems.MapLocation;
+import App.Map.MapItems.Water;
+import App.VehicleGenerator.CsvDataReader;
 
 import App.Vehicles.Vehicle;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
 
@@ -13,19 +16,24 @@ import App.DataTypes.*;
 
 
 /**
- * CustomMap class represents a grid-based map with vehicles.
+ * CustomMap class represents a grid-based map with Vehicles.
  */
 public class CustomMap {
     private Map<Location, String> mapElements;
-    private DoubleLinkedList<Vehicle> vehicles;
-    private List<Location> MapLocations;
-    private List<Location>WaterLocations;
-    private List<Location>HeliPads;
-
-
+    private DoubleLinkedList<Vehicle> Vehicles;
+    private List<MapLocation> MapLocations = CsvDataReader.returnMapLocations();
+    private List<Water>WaterLocations = CsvDataReader.returnWaterLocations();
+    private List<HeliPad> HeliPads = CsvDataReader.returnHelipadList();
+    public void PrintMapLocations(){
+        int count =1;
+        for(MapLocation location:MapLocations){
+            System.out.println(count +": "+location.getName());
+            count++;
+        }
+    }
     public CustomMap() throws IOException {
         this.mapElements = new HashMap<>();
-        this.vehicles = new DoubleLinkedList<>();
+        this.Vehicles = new DoubleLinkedList<>();
         
         initializeMap();
     }
@@ -34,23 +42,34 @@ public class CustomMap {
      * Initializes the map 
      */
     public void initializeMap() throws IOException {
-        List<Vehicle> vehicleList = VehicleDataReader.returnVehicleList();
+        List<Vehicle> vehicleList = CsvDataReader.returnVehicleList();
         for (Vehicle vehicle : vehicleList) {
             addElement(vehicle, "V");
-            vehicles.add(vehicle);
+            Vehicles.add(vehicle);
         }
     }
 
     /**
-     * Adds vehicles to the map based on user input.
+     * Adds Vehicles to the map based on user input.
      */
+    public void addMapItems(){
+        for (MapLocation mapLocation:MapLocations){
+            addElement(mapLocation,"M");
+        }
+        for(HeliPad heliPad:HeliPads){
+            addElement(heliPad,"H");
+        }
+        for(Water water:WaterLocations){
+            addElement(water,"W");
+        }
+    }
     public void addVehicles() throws IOException {
         System.out.println("Vehicles added successfully!");
-        List<Vehicle> returnedList = VehicleDataReader.returnVehicleList();
+        List<Vehicle> returnedList = CsvDataReader.returnVehicleList();
 
         for (Vehicle vehicle : returnedList) {
 //            if (isWithinMapBounds(vehicle.GetLocation().getX(), vehicle.GetLocation().getY())) {
-                vehicles.add(vehicle);
+            Vehicles.add(vehicle);
                 addElement(vehicle, "V");
            // } else {
 //                System.out.println("Invalid coordinates for vehicle: (" +
@@ -86,13 +105,10 @@ public class CustomMap {
         
     }
 
-    
-    
-
     public void addElement(MapItem element, String symbol) {
         Location location = element.GetLocation();
-        System.out.println("Adding " + element.getClass().getSimpleName() +
-                " at map coordinates: " + location);
+//        System.out.println("Adding " + element.getClass().getSimpleName() +
+//                " at map coordinates: " + location);
                 mapElements.put(location, symbol);
     }
 
@@ -110,7 +126,7 @@ public class CustomMap {
         int y = userLocation.getY();
 
         DoubleLinkedList<Vehicle> allVehicles = getVehicles();
-        DoubleLinkedList<Vehicle> vehiclesInContact = new DoubleLinkedList<>();
+        DoubleLinkedList<Vehicle> VehiclesInContact = new DoubleLinkedList<>();
 
         for (Vehicle vehicle : allVehicles.getAll()) {
             Location vehicleLocation = vehicle.GetLocation();
@@ -119,10 +135,10 @@ public class CustomMap {
 
             // Check if the vehicle is within the square of side length 2r centered at the user's location
             if (Math.abs(vehicleX - x) <= r && Math.abs(vehicleY - y) <= r) {
-                vehiclesInContact.add(vehicle);
+                VehiclesInContact.add(vehicle);
             }
         }
-        return vehiclesInContact;
+        return VehiclesInContact;
     }
 
     
@@ -153,10 +169,10 @@ public class CustomMap {
     }
 
     /**
-     * Gets the list of vehicles on the map.
-     * @return The list of vehicles.
+     * Gets the list of Vehicles on the map.
+     * @return The list of Vehicles.
      */
     public DoubleLinkedList<Vehicle> getVehicles() {
-        return vehicles;
+        return Vehicles;
     }
 }
