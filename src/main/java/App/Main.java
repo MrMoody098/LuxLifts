@@ -10,13 +10,14 @@ import App.Vehicles.Vehicle;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
 
 /**
  * The main class for testing the Login, Signup, and Map functionalities.
  */
-public class Main {
+public class Main implements VehicleHiringTest{
     private static Passenger user;
     public static CustomMap customMap;
 
@@ -180,5 +181,35 @@ public static Passenger Login(){ // passenger chose to login
             
         customMap.displayMap();
         }
+    }
+    // Inserts the vehicle with registration number reg to the map at location loc if it has not been already added to map.
+// It should return false if the vehicle is not registered or is already on map
+    @Override
+    public boolean testAddToMap(String reg, Location loc) {
+        return false;
+    }
+    // Update the location of the vehicle with the specified reg number to location loc if vehicle exists and return true.
+//Return false if vehicle not registered or has not been added to the map
+    @Override
+    public boolean testMoveVehicle(String reg, Location loc) {
+        return false;
+    }
+    // Remove the vehicle with the specified reg number from the map if it is registered and return true.
+// If vehicle is not registered or is not on map the method returns false
+    @Override
+    public boolean testRemoveVehicle(String reg) {
+        return false;
+    }
+    // Return the location of vehicle specified by the reg number if it is registered and added to the map, null otherwise
+    @Override
+    public Location testGetVehicleLoc(String reg) {
+        return null;
+    }
+    // Return a list of all vehicles registration numbers located within a square of side 2*r centered at location loc (inclusive
+//of the boundaries)
+    @Override
+    public List<String> testGetVehiclesInRange(Location loc, int r) {
+        DoubleLinkedList<Vehicle> vehicles = customMap.getVehiclesInContactRange(new Passenger("Test",loc),r);
+        return (List<String>) vehicles;
     }
 }
