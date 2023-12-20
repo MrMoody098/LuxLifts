@@ -19,6 +19,8 @@ public class CustomMap {
     private Map<Location, String> mapElements;
     private DoubleLinkedList<Vehicle> vehicles;
     private List<Location> MapLocations;
+    private List<Location>WaterLocations;
+    private List<Location>HeliPads;
 
 
     public CustomMap() throws IOException {
@@ -47,13 +49,13 @@ public class CustomMap {
         List<Vehicle> returnedList = VehicleDataReader.returnVehicleList();
 
         for (Vehicle vehicle : returnedList) {
-            if (isWithinMapBounds(vehicle.GetLocation().getX(), vehicle.GetLocation().getY())) {
+//            if (isWithinMapBounds(vehicle.GetLocation().getX(), vehicle.GetLocation().getY())) {
                 vehicles.add(vehicle);
                 addElement(vehicle, "V");
-            } else {
-                System.out.println("Invalid coordinates for vehicle: (" +
-                        vehicle.GetLocation().getX() + ", " + vehicle.GetLocation().getY() + ")");
-            }
+           // } else {
+//                System.out.println("Invalid coordinates for vehicle: (" +
+//                        vehicle.GetLocation().getX() + ", " + vehicle.GetLocation().getY() + ")");
+            //}
         }
     }
     
@@ -91,15 +93,7 @@ public class CustomMap {
         Location location = element.GetLocation();
         System.out.println("Adding " + element.getClass().getSimpleName() +
                 " at map coordinates: " + location);
-    
-        int adjustedX = location.getX() - 1;
-        int adjustedY = location.getY() - 1;
-
-        if (isWithinMapBounds(adjustedX, adjustedY)) {
                 mapElements.put(location, symbol);
-            System.out.println("Invalid coordinates: (" + location.getX() + ", " + location.getY() + ")");
-
-        }
     }
 
     private void removeElement(MapItem element) {

@@ -2,57 +2,55 @@ package App.Vehicles.Types;
 
 import App.Map.CustomMap;
 import App.Map.Location;
-import App.Map.MapItem;
 import App.Vehicles.Vehicle;
 
 public class LandVehicle extends Vehicle {
+    // Constructor
     public LandVehicle(String registrationNumber, double driverRating, String driverName, String phoneNumber, Location location) {
         super(registrationNumber, driverRating, driverName, phoneNumber, location);
     }
 
+    // MoveTo method to navigate the land vehicle to a destination on the map
     @Override
     public Location MoveTo(Location destination, CustomMap customMap) {
+        // Display the initial state of the map
+        customMap.addElement(this, "V");
+        customMap.displayMap();
+        // Move on the X axis towards the destination first
+        while (GetLocation().getX() != destination.getX()) {
+            customMap.addElement(this,"V");
+            System.out.println("MyX:" + GetLocation().getX() + " MyY:" + GetLocation().getY());
+            int MyX = GetLocation().getX();
+            int destinationX = destination.getX();
 
-            while (GetLocation().getX() != destination.getX() || GetLocation().getX() != destination.getY()) {
-                if (GetLocation().equals(destination)) {
-                    System.out.println("Already at the destination.");
-                }
-                customMap.addElement(this, "V");
-                customMap.displayMap();
-
-                //Loop MoveOn X axis towards destination
-                while (GetLocation().getX() != destination.getX()) {
-                    System.out.println("MyX:" + GetLocation().getX() + " MyY:" + GetLocation().getY());
-
-                    //If MyX is smaller than the destination X Increment MyX by 1
-                    if (GetLocation().getX() < destination.getX()) {
-                        SetLocation(GetLocation().getX() + 1, GetLocation().getY());
-                    }
-                    //else if Myx is bigger than the destination X Decrement Myx by 1
-                    else if (GetLocation().getX() > destination.getX()) {
-                        SetLocation(GetLocation().getX() - 1, GetLocation().getY());
-                    }
-
-                }
-                //Loop MoveOn Y axis towards destination
-
-                while (GetLocation().getY() != destination.getY()) {
-                    System.out.println("MyX:" + GetLocation().getX() + " MyY:" + GetLocation().getY());
-                    //If MyY is smaller than the destination Increment: MyY by 1
-                    if (GetLocation().getY() < destination.getY()) {
-                        SetLocation(GetLocation().getX(), GetLocation().getY() + 1);
-                    }
-
-                    //else if myy is bigger than th destination Y Decrement: Mby by 1
-                    else if (GetLocation().getY() > destination.getY()) {
-                        SetLocation(GetLocation().getX(), GetLocation().getY() - 1);
-                    }
-                }
-                //display updated position
-                customMap.displayMap();
-
+            // Increment MyX b 1 by if smaller than the destination X
+            if (GetLocation().getX() < destination.getX()) {
+                this.SetLocation(GetLocation().getX() + 1, GetLocation().getY());
+            } else if (GetLocation().getX() > destination.getX()) {
+                // Decrement MyX by 1 if bigger than the destination X
+                this.SetLocation(GetLocation().getX() - 1, GetLocation().getY());
             }
-            return GetLocation();
+            customMap.displayMap();
         }
-    }
+        // Move on the Y axis towards the destination second
+        while (GetLocation().getY() != destination.getY()) {
+            customMap.addElement(this,"V");
+            int MyY = GetLocation().getY();
+            int destinationY = destination.getY();
+            System.out.println("MyX:" + GetLocation().getX() + " MyY:" + MyY);
 
+            // Increment MyY by 1 if smaller than the destination Y
+            if (MyY < destinationY) {
+                this.SetLocation(this.GetLocation().getX(), MyY + 1);
+            } else if (MyY > destinationY) {
+                // Decrement MyY by 1 if bigger than the destination Y
+                this.SetLocation(this.GetLocation().getX(), MyY - 1);
+            }
+            customMap.displayMap();
+        }
+        // Display the updated position on the map
+        customMap.displayMap();
+
+        return GetLocation();  // Return the final location
+    }
+}
