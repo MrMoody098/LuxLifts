@@ -1,5 +1,6 @@
 package App.Map;
 
+import App.Authentication.Auth;
 import App.Map.MapItems.HeliPad;
 import App.Map.MapItems.MapItem;
 import App.Map.MapItems.MapLocation;
@@ -30,6 +31,9 @@ public class CustomMap {
         }
     }
 
+    public List<MapLocation> returnMapLocations(){
+        return MapLocations;
+    }
     // Constructor for CustomMap class
     public CustomMap() throws IOException {
         this.mapElements = new HashMap<>();
@@ -72,12 +76,8 @@ public class CustomMap {
     }
 
     // Method to add a user to the map
-    public void addUser() {
-        Scanner scanner = new Scanner(System.in);
-
-        System.out.println("Enter your username:");
-        String username = scanner.nextLine();
-
+    public void addUser(Passenger user) {
+        Scanner scanner =new Scanner(System.in);
         System.out.println("Enter your x-coordinate:");
         int x = scanner.nextInt();
 
@@ -88,8 +88,6 @@ public class CustomMap {
 
         // Check if the user's location is within the map bounds and not already occupied
         if (isWithinMapBounds(x, y) && !mapElements.containsKey(location)) {
-            Passenger user = new Passenger(username, location);
-
             addElement(user, "U"); // Add user to the map
             System.out.println("User added successfully!");
         } else {

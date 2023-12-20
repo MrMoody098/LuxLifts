@@ -13,7 +13,6 @@ import java.io.IOException;
 public class Test {
     public static void main(String[] args) throws IOException {
         CustomMap customMap = new CustomMap();
-        customMap.addUser();
         customMap.displayMap();
         customMap.addMapItems();
         customMap.displayMap();
