@@ -67,7 +67,7 @@ public class VehicleDataReader {
                 if (data.length >= 2) {
                     String regNum = data[0];
                     String typeString = data[1];
-                    String[] driverRatingStr = data[2].split(",");
+                    String[] driverRatingStr = data[2].split(";");
                     double[] driverRating = new double[driverRatingStr.length];
                     double DriverAverage = getAverageDriverRating(driverRating);
                     for (int i = 0; i < driverRatingStr.length; i++) {

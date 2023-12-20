@@ -7,7 +7,7 @@ import java.security.NoSuchAlgorithmException;
 
 //this class should be able to login/signup a user
 public class Auth{
-    public static String USER_CSV_FILE = "/LuxLifts/src/main/java/App/UserData/User.java";
+    public static String USER_CSV_FILE = "LuxLifts/src/main/java/App/UserData/Users.csv";
     public static String VEHICLE_CSV_FILE = "LuxLifts/src/main/java/App/VehicleGenerator/Vehicles.csv";
 
     // Updated login method using1 password hashing

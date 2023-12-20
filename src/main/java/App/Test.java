@@ -22,7 +22,7 @@ public class Test {
         Location brokerStree = new Location(8,6);
        heli.MoveTo(brokerStree,customMap);
         System.out.println("\n\n");
-        taxi.MoveTo(brokerStree,customMap);
+        limo.MoveTo(brokerStree,customMap);
     }
     }
 
