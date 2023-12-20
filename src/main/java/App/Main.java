@@ -10,6 +10,7 @@ import App.Vehicles.Vehicle;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.Scanner;
@@ -44,11 +45,25 @@ public class Main implements VehicleHiringTest{
         // Test the Login and Signup functionality
         // Test the Map functionality
 
-        user = LoginSignupTest();
-        CsvGenerator.main(null);
+        
+        
         MapTest ();
 
     }
+    public static void logo() {
+        System.out.println("__        __   _                            _         ");
+        System.out.println(" \\ \\      / /__| | ___ ___  _ __ ___   ___  | |_ ___   ");
+        System.out.println("  \\ \\ /\\ / / _ \\ |/ __/ _ \\| '_ ` _ \\ / _ \\ | __/ _ \\  ");
+        System.out.println("   \\ V  V /  __/ | (_| (_) | | | | | |  __/ | || (_) | ");
+        System.out.println("    \\_/\\_/ \\___|_|\\___\\___/|_| |_| |_|\\___|  \\__\\___/  ");
+        System.out.println();
+        System.out.println(" _               _     _  __ _       ");
+        System.out.println("| |   _   ___  _| |   (_)/ _| |_ ___ ");
+        System.out.println("| |  | | | \\ \\/ / |   | | |_| __/ __|");
+        System.out.println("| |__| |_| |>  <| |___| |  _| |\\__ \\");
+        System.out.println("|_____\\__,_/_/\\_\\_____|_|_|  \\__|___/");
+    }
+    
 
     /**
      * Method to test the Login and Signup functionality.
@@ -106,20 +121,44 @@ public static Passenger Login(){ // passenger chose to login
     public static void MapTest() throws IOException {
         //we need to also add the user to this map
         // Create a CustomMap object
-        System.out.println("This is the initial map:");
-        customMap.displayMap();
+        logo();
+        System.out.println("\nThis is the inital map:");
+        
+        customMap.firstMap();
+
+        System.out.println("Do you want to see vehicles on the map?");
+        String input = scanner.nextLine();
+        if (input.equalsIgnoreCase("yes")){
+            System.out.println("\nPlease first Login/Signup");
+            user = LoginSignupTest();
+            //customMap.initializeMap();
+        }else{
+            System.out.println("You first need to login/signup");
+        }
+
         AddvehicleTest();
 
-        MoveVehicle();
+        
         AddUser();
         DoubleLinkedList<Vehicle> vehiclesInContact = customMap.getVehiclesInContactRange(user, 2);
-        //MoveVehicle();
-        AddUser();
+        System.out.println("Vehicles in contact range:");
+        if (vehiclesInContact.size()==0){
+                System.out.println("no vehicles sorry bestie");
+            }else{
+                for (Vehicle vehicle : vehiclesInContact.getAll()) {
+                    vehicle.printVehicleDetails();;
+                    System.out.println(); 
+                }
+        }
+
+        System.out.println("");
+        
     }
 
     public static void AddvehicleTest() throws IOException {
             // Add vehicles to the map
-            customMap.addVehicles();
+            //customMap.addVehicles();
+            customMap.addMapItems();
             // Display the updated map
             customMap.displayMap();
     }
@@ -139,7 +178,7 @@ public static Passenger Login(){ // passenger chose to login
 
         System.out.println("passenger added to the map.");
         customMap.displayMap();
-    
+    /* 
         // Use the existing user (assumed to be already signed up)
         Passenger existingUser = user;
     
@@ -153,7 +192,7 @@ public static Passenger Login(){ // passenger chose to login
             customMap.displayMap();
         } else {
             System.out.println("User not found. Please sign up or log in first.");
-        }
+        }*/
 
     }
         
@@ -182,34 +221,74 @@ public static Passenger Login(){ // passenger chose to login
         customMap.displayMap();
         }
     }
-    // Inserts the vehicle with registration number reg to the map at location loc if it has not been already added to map.
-// It should return false if the vehicle is not registered or is already on map
     @Override
-    public boolean testAddToMap(String reg, Location loc) {
+    public boolean testAddToMap(String registrationNumber, Location location) {
+        for (Vehicle vehicle : customMap.getVehicles().getAll()) {
+            if (vehicle.getRegistrationNumber().equals(registrationNumber) && !customMap.getVehicles().contains(vehicle)) {
+                customMap.addElement(vehicle, "V");
+                return true;
+            }
+        }
         return false;
     }
-    // Update the location of the vehicle with the specified reg number to location loc if vehicle exists and return true.
-//Return false if vehicle not registered or has not been added to the map
+    
+
     @Override
-    public boolean testMoveVehicle(String reg, Location loc) {
-        return false;
+    public boolean testMoveVehicle(String registrationNumber, Location location) {
+        for (Vehicle vehicle : customMap.getVehicles().getAll()) {
+            if (vehicle.getRegistrationNumber().equals(registrationNumber)) {
+                try {
+                    Location finalLocation = vehicle.MoveTo(location, customMap);
+                    return finalLocation.equals(location);
+                } catch (FileNotFoundException e) {
+                    // Handle the exception (e.g., print an error message)
+                    e.printStackTrace();
+                    return false;
+                }
+            }
+        }
+        return false; // Vehicle not found
     }
-    // Remove the vehicle with the specified reg number from the map if it is registered and return true.
-// If vehicle is not registered or is not on map the method returns false
+
     @Override
-    public boolean testRemoveVehicle(String reg) {
-        return false;
+    public boolean testRemoveVehicle(String registrationNumber) {
+       // Find the vehicle by registration number
+       for (Vehicle vehicle : customMap.getVehicles().getAll()) {
+        if (vehicle.getRegistrationNumber().equals(registrationNumber)) {
+            // Remove the vehicle from the map
+            customMap.getVehicles().remove(vehicle);
+            customMap.removeElement(vehicle, "V");
+            return true;
+        }
     }
-    // Return the location of vehicle specified by the reg number if it is registered and added to the map, null otherwise
+    return false; // Vehicle not found
+}
+
     @Override
-    public Location testGetVehicleLoc(String reg) {
-        return null;
+    public Location testGetVehicleLoc(String registrationNumber) {
+        for (Vehicle vehicle : customMap.getVehicles().getAll()) {
+            if (vehicle.getRegistrationNumber().equals(registrationNumber)) {
+                // Return the current location of the vehicle
+                return vehicle.GetLocation();
+            }
+        }
+        return null; 
     }
-    // Return a list of all vehicles registration numbers located within a square of side 2*r centered at location loc (inclusive
-//of the boundaries)
+
     @Override
-    public List<String> testGetVehiclesInRange(Location loc, int r) {
-        DoubleLinkedList<Vehicle> vehicles = customMap.getVehiclesInContactRange(new Passenger("Test",loc),r);
-        return (List<String>) vehicles;
+    public List<String> testGetVehiclesInRange(Location location, int r) {
+        DoubleLinkedList<Vehicle> vehiclesInContact = customMap.getVehiclesInContactRange(new Passenger("Test", location), r);
+        return getRegistrationNumbers(vehiclesInContact);
     }
+    private List<String> getRegistrationNumbers(DoubleLinkedList<Vehicle> vehicles) {
+        List<String> vehicleRegistrationNumbers = new ArrayList<>();
+
+        for (Vehicle vehicle : vehicles.getAll()) {
+            vehicleRegistrationNumbers.add(vehicle.getRegistrationNumber());
+        }
+
+        return vehicleRegistrationNumbers;
+    }
+
+
 }

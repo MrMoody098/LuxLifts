@@ -104,6 +104,16 @@ public class CustomMap {
 
         
     }
+    public void firstMap() {
+        for (int i = 9; i >= 0; i--) {
+            for (int j = 0; j < 10; j++) {
+                Location currentLocation = new Location(j, i);
+                String element = "."; // Default to "." for an empty map
+                System.out.print(element + "   ");
+            }
+            System.out.println();
+        }
+    }
 
     public void addElement(MapItem element, String symbol) {
         Location location = element.GetLocation();
@@ -112,7 +122,7 @@ public class CustomMap {
                 mapElements.put(location, symbol);
     }
 
-    private void removeElement(MapItem element) {
+    public void removeElement(MapItem element, String symbol) {
         Location location = element.GetLocation();
         System.out.println("Removing " + element.getClass().getSimpleName() +
                 " from map coordinates: " + location);

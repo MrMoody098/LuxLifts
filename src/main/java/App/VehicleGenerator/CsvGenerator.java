@@ -24,6 +24,7 @@ public class CsvGenerator {
                 String driverName = generateDriverName();
                 String phoneNumber = generatePhoneNumber();
                 int[] location = generateLocation();
+                boolean isAvailable = generateIsAvailable();
 
                 // Write entry to the CSV file
                 csvWriter.append(String.format("%s,%s,%s,%s,%s,%s,%s\n",
@@ -41,6 +42,11 @@ public class CsvGenerator {
         String[] allVehicleTypes = {"LIMO", "HELICOPTER", "PRIVATE_JET", "YACHT", "TAXI"};
         String type = allVehicleTypes[new Random().nextInt(allVehicleTypes.length)];
         return type;
+    }
+
+    private static boolean generateIsAvailable() {
+        // Generate a random boolean value (true or false) for isAvailable
+        return new Random().nextBoolean();
     }
 
     private static String generateRegistrationNumber() {
