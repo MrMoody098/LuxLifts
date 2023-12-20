@@ -88,6 +88,23 @@ public class DoubleLinkedList<T> {
     }
 
     /**
+     * Checks if the list contains the specified element.
+     *
+     * @param data The data to check for.
+     * @return True if the list contains the element, false otherwise.
+     */
+    public boolean contains(T data){
+        Node current = head;
+        while (current != null){
+            if (current.data.equals(data)){
+                return true;
+            }
+            current = current.next;
+        }
+        return false;
+    }
+
+    /**
      * Moves the specified element to the end of the list.
      *
      * @param data The data to be moved to the end.

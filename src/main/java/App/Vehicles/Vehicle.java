@@ -73,6 +73,7 @@ public abstract class Vehicle implements MapItem {
     }
     public void printVehicleDetails() {
         System.out.println("Registration Number: " + this.registrationNumber);
+        //System.err.println("Location: " + this.location);
         System.out.println("Driver Rating: " + this.driverRating);
         System.out.println("Vehicle Type: " + this.type);
         System.out.println("Is Available: " + this.isAvailable);

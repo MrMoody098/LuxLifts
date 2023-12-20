@@ -1,4 +1,4 @@
-package App.DataTypes;
+/*package App.DataTypes;
 
 import java.util.Random;
 
@@ -10,4 +10,4 @@ public class DefaultTaxiTypeList implements TaxiTypeList {
         int randomIndex = new Random().nextInt(TAXI_TYPES.length);
         return TAXI_TYPES[randomIndex];
     }
-}
+}/* */

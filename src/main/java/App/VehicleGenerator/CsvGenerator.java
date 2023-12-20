@@ -24,6 +24,7 @@ public class CsvGenerator {
                 String driverName = generateDriverName();
                 String phoneNumber = generatePhoneNumber();
                 int[] location = generateLocation();
+                boolean isAvailable = generateIsAvailable();
 
                 // Write entry to the CSV file
                 csvWriter.append(String.format("%s,%s,%s,%s,%s,%s,%s\n",
@@ -43,29 +44,34 @@ public class CsvGenerator {
         return type;
     }
 
+    private static boolean generateIsAvailable() {
+        // Generate a random boolean value (true or false) for isAvailable
+        return new Random().nextBoolean();
+    }
+
     private static String generateRegistrationNumber() {
         // Generate a random registration number
         return "ABC" + new Random().nextInt(1000);
     }
 
     private static String generateDriverRating() {
-        // Generate a String such as {1;3;5;6} that is 4 random doubles seperated by a semicolone  of random driver ratings
+        // Generate a String with 4 random doubles between 1.0 and 5.0
         Random random = new Random();
         StringBuilder ratingStringBuilder = new StringBuilder();
-
+    
         for (int i = 0; i < 4; i++) {
-            // Generate a random double between 1 and 5 (adjust the range as needed)
-            int randomRating = random.nextInt(5);
-
+            // Generate a random double between 1.0 and 5.0 (inclusive)
+            double randomRating = 1.0 + random.nextDouble() * 4.0;
+    
             // Append the random rating to the StringBuilder
             ratingStringBuilder.append(randomRating);
-
+    
             // If it's not the last rating, add a semicolon as a separator
             if (i < 3) {
                 ratingStringBuilder.append(";");
             }
         }
-
+    
         return ratingStringBuilder.toString();
     }
 
