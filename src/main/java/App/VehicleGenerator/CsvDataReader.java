@@ -1,20 +1,24 @@
 
 package App.VehicleGenerator;
 
+import App.Map.MapItems.HeliPad;
 import App.Map.Location;
+import App.Map.MapItems.MapLocation;
+import App.Map.MapItems.Water;
 import App.Vehicles.*;
 
 import java.io.BufferedReader;
-import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-public class VehicleDataReader {
-    private static String csvFilePath = "LuxLifts/src/main/java/App/VehicleGenerator/Vehicles.csv";
-    private static String MapLocationCSV = "LuxLifts/src/main/java/App/Map/MapLocations.csv";
+public class CsvDataReader {
+    private static String VEHICLE_CSV = "LuxLifts/src/main/java/App/VehicleGenerator/Vehicles.csv";
+    private static String MAP_LOCATION_CSV = "LuxLifts/src/main/java/App/Map/MapItems/MapLocations.csv";
+    private static String HELIPAD_LOCATIONS_CSV = "LuxLifts/src/main/java/App/Map/MapItems/HelipadLocations.csv";
+    private static String WATER_LOCATIONS_CSV = "LuxLifts/src/main/java/App/Map/MapItems/WaterLocations.csv";
     private static Scanner scanner = new Scanner(System.in);
 
     public static double getAverageDriverRating(double[] driverRating) {
@@ -25,11 +29,10 @@ public class VehicleDataReader {
         }
         return sum / driverRating.length;
     }
+    public static List<Water> returnWaterLocations(){
+        List<Water> waterLocations = new ArrayList<>();
 
-    public static List<Location> returnMapLocations() {
-        List<Location> mapLocations = new ArrayList<>();
-
-        try (BufferedReader csvReader = new BufferedReader(new FileReader(MapLocationCSV))) {
+        try (BufferedReader csvReader = new BufferedReader(new FileReader(WATER_LOCATIONS_CSV))) {
             String line;
             // Skip the header line
             csvReader.readLine();
@@ -37,7 +40,50 @@ public class VehicleDataReader {
             while ((line = csvReader.readLine()) != null) {
 
                 String[] data = line.split(",");
-                if (data.length >= 2) {
+                if (data.length >= 1) {
+                    String X = data[0];
+                    int x = Integer.parseInt(X);
+                    String Y = data[1];
+                    int y = Integer.parseInt(Y);
+                    Location location = new Location(x,y);
+                    waterLocations.add(new Water(location));
+                }
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+        return waterLocations;
+    }
+    public static List<MapLocation> returnMapLocations(){
+        List<Location> locations = returnLocations(MAP_LOCATION_CSV);
+        List<MapLocation> mapLocations = new ArrayList<>();
+        for(Location location:locations){
+            mapLocations.add(new MapLocation(location, location.getName()));
+        }
+        return mapLocations;
+    }
+
+    public static List<HeliPad> returnHelipadList(){
+        List<Location> locations =returnLocations(HELIPAD_LOCATIONS_CSV);
+        List<HeliPad> heliPads = new ArrayList<>();
+        for(Location location:locations){
+            heliPads.add(new HeliPad(location, location.getName()));
+        }
+        return heliPads;
+    }
+
+
+    public static List<Location> returnLocations(String dir) {
+        List<Location> mapLocations = new ArrayList<>();
+
+        try (BufferedReader csvReader = new BufferedReader(new FileReader(dir))) {
+            String line;
+            // Skip the header line
+            csvReader.readLine();
+
+            while ((line = csvReader.readLine()) != null) {
+
+                String[] data = line.split(",");
                     String Name = data[0];
                     String X = data[1];
                     int x = Integer.parseInt(X);
@@ -45,7 +91,6 @@ public class VehicleDataReader {
                     int y = Integer.parseInt(Y);
                     Location location = new Location(x,y,Name);
                    mapLocations.add(location);
-                }
             }
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -56,7 +101,7 @@ public class VehicleDataReader {
     public static List<Vehicle> returnVehicleList() throws IOException {
         List<Vehicle> vehicleList = new ArrayList<>();
 
-        try (BufferedReader csvReader = new BufferedReader(new FileReader(csvFilePath))) {
+        try (BufferedReader csvReader = new BufferedReader(new FileReader(VEHICLE_CSV))) {
             String line;
             // Skip the header line
             csvReader.readLine();

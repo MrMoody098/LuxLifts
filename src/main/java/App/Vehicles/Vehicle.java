@@ -1,7 +1,7 @@
 //package name
 package App.Vehicles;
 import App.Map.Location;
-import App.Map.MapItem;
+import App.Map.MapItems.MapItem;
 public abstract class Vehicle implements MapItem {
     private int Speed;
     private Location location;

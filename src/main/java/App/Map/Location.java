@@ -2,7 +2,7 @@ package App.Map;
 
 import java.util.Objects;
 
-public class Location {
+public class Location  {
     private int x;
     private int y;
     public String name;
@@ -26,6 +26,9 @@ public class Location {
         return this.y;
     }
 
+    public Location getLocation(){
+        return this;
+    }
     
      @Override
     public boolean equals(Object obj) {

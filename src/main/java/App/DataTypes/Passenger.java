@@ -1,7 +1,7 @@
 package App.DataTypes;
 import App.Map.CustomMap;
 import App.Map.Location;
-import App.Map.MapItem;
+import App.Map.MapItems.MapItem;
 public class Passenger implements MapItem {
     private String username;
     private Location location;
