@@ -5,6 +5,8 @@ import App.Map.Location;
 import App.Map.MapItems.MapLocation;
 import App.Map.MapItems.Water;
 import App.Vehicles.*;
+import App.Vehicles.Taxi.Taxi;
+import App.Vehicles.Taxi.Taxis;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -176,12 +178,14 @@ public class CsvDataReader {
                     String typeString = data[1];
                     String[] driverRatingStr = data[2].split(";");
                     double[] driverRating = new double[driverRatingStr.length];
-                    double DriverAverage = getAverageDriverRating(driverRating);
 
                     // Convert driver ratings to doubles
                     for (int i = 0; i < driverRatingStr.length; i++) {
                         driverRating[i] = Double.parseDouble(driverRatingStr[i]);
                     }
+
+                    // Calculate the average driver rating
+                    double DriverAverage = getAverageDriverRating(driverRating);
 
                     // Extract additional vehicle details
                     String driverName = data[3];
@@ -203,7 +207,16 @@ public class CsvDataReader {
                         case "YACHT":
                             vehicleList.add(new Yacht(regNum, DriverAverage, driverName, phoneNumber, new Location(x, y)));
                             break;
-                    }
+                        case "TAXI":
+                            // Generate a random index to select a random taxi type
+                            int randomIndex = (int) (Math.random() * Taxis.values().length);
+                            
+                            // Get the random taxi type
+                            Taxis randomTaxiType = Taxis.values()[randomIndex];
+                            
+                            // Add the Taxi object to the vehicleList
+                            vehicleList.add(new Taxi(randomTaxiType, regNum, DriverAverage, driverName, phoneNumber, new Location(x, y)));
+                        break;
                 }
             }
         }
@@ -211,4 +224,5 @@ public class CsvDataReader {
         // Return the list of vehicles
         return vehicleList;
     }
+}
 }
