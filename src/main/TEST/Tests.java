@@ -1,5 +1,6 @@
-import main.App.Authentication.Auth;
-import main.App.DataTypes.Passenger;
+
+import App.Authentication.Auth;
+import App.DataTypes.Passenger;
 import org.junit.Before;
 import org.junit.jupiter.api.Test;
 
