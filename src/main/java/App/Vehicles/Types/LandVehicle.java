@@ -2,7 +2,7 @@ package App.Vehicles.Types;
 
 import App.Map.CustomMap;
 import App.Map.Location;
-import App.Map.MapItem;
+
 import App.Vehicles.Vehicle;
 
 public class LandVehicle extends Vehicle {

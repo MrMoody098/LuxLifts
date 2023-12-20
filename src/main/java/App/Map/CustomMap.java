@@ -1,17 +1,23 @@
 package App.Map;
 
+import App.VehicleGenerator.CsvDataReader;
 import App.VehicleGenerator.VehicleDataReader;
 import App.Vehicles.Helicopter;
 import App.Vehicles.Vehicle;
 
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
 import App.DataTypes.*;
+import App.Map.MapItems.HeliPad;
+import App.Map.MapItems.MapItem;
+import App.Map.MapItems.MapLocation;
+import App.Map.MapItems.Water;
 
 
 
@@ -21,7 +27,16 @@ import App.DataTypes.*;
 public class CustomMap {
     private Map<Location, String> mapElements;
     private DoubleLinkedList<Vehicle> vehicles;
-    
+    private List<MapLocation> MapLocations = CsvDataReader.returnMapLocations();
+    private List<Water>WaterLocations = CsvDataReader.returnWaterLocations();
+    private List<HeliPad> HeliPads = CsvDataReader.returnHelipadList();
+    public void PrintMapLocations(){
+        int count =1;
+        for(MapLocation location:MapLocations){
+            System.out.println(count +": "+location.getName());
+            count++;
+        }
+    }
 
     public CustomMap() throws FileNotFoundException {
         this.mapElements = new HashMap<>();
@@ -33,10 +48,10 @@ public class CustomMap {
     /**
      * Initializes the map 
      */
-    public void initializeMap() throws FileNotFoundException {
-        List<Vehicle> vehicleList = VehicleDataReader.returnVehicleList();
+    public void initializeMap() throws IOException {
+        List<Vehicle> vehicleList = CsvDataReader.returnVehicleList();
         for (Vehicle vehicle : vehicleList) {
-            addElement(vehicle, "V");
+            addElement((MapItem) vehicle, "V");
             vehicles.add(vehicle);
         }
     }
@@ -44,18 +59,30 @@ public class CustomMap {
     /**
      * Adds vehicles to the map based on user input.
      */
-    public void addVehicles() throws FileNotFoundException {
+    public void addVehicles() throws IOException {
         System.out.println("Vehicles added successfully!");
-        List<Vehicle> returnedList = VehicleDataReader.returnVehicleList();
+        List<Vehicle> returnedList = CsvDataReader.returnVehicleList();
 
         for (Vehicle vehicle : returnedList) {
-            if (isWithinMapBounds(vehicle.GetLocation().getX(), vehicle.GetLocation().getY())) {
-                vehicles.add(vehicle);
-                addElement(vehicle, "V");
-            } else {
-                System.out.println("Invalid coordinates for vehicle: (" +
-                        vehicle.GetLocation().getX() + ", " + vehicle.GetLocation().getY() + ")");
-            }
+//            if (isWithinMapBounds(vehicle.GetLocation().getX(), vehicle.GetLocation().getY())) {
+            vehicles.add(vehicle);
+                addElement((MapItem) vehicle, "V");
+           // } else {
+//                System.out.println("Invalid coordinates for vehicle: (" +
+//                        vehicle.GetLocation().getX() + ", " + vehicle.GetLocation().getY() + ")");
+            //}
+        }
+    }
+
+    public void addMapItems(){
+        for (MapLocation mapLocation:MapLocations){
+            addElement(mapLocation,"M");
+        }
+        for(HeliPad heliPad:HeliPads){
+            addElement(heliPad,"H");
+        }
+        for(Water water:WaterLocations){
+            addElement(water,"W");
         }
     }
 
@@ -92,18 +119,11 @@ public class CustomMap {
 
     public void addElement(MapItem element, String symbol) {
         Location location = element.GetLocation();
-        System.out.println("Adding " + element.getClass().getSimpleName() +
-                " at map coordinates: " + location);
-    
-        int adjustedX = location.getX();
-        int adjustedY = location.getY();
-
-        if (isWithinMapBounds(adjustedX, adjustedY)) {
-            mapElements.put(location, symbol);
-        } else {
-            System.out.println("Invalid coordinates: (" + location.getX() + ", " + location.getY() + ")");
-        }
+//        System.out.println("Adding " + element.getClass().getSimpleName() +
+//                " at map coordinates: " + location);
+                mapElements.put(location, symbol);
     }
+
 
     private void removeElement(MapItem element) {
         Location location = element.GetLocation();

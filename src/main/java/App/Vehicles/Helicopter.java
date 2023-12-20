@@ -2,7 +2,6 @@ package App.Vehicles;
 
 import App.Map.CustomMap;
 import App.Map.Location;
-import App.Map.MapItem;
 import App.Vehicles.Types.AirVehicle;
 
 public class Helicopter extends AirVehicle {

@@ -1,24 +1,46 @@
 //package name
 package App.Vehicles;
-
 import App.Map.Location;
-import App.Map.MapItem;
-
-
+import App.Map.MapItems.MapItem;
 public abstract class Vehicle implements MapItem {
     private int Speed;
     private Location location;
      private String registrationNumber;
+     private String driverName;
      private String phoneNumber;
     private double driverRating;
     private VehicleType type;
     private boolean isAvailable;
-    
+
+
+    public void setSpeed(int speed) {
+        Speed = speed;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+    public String getDriverName(){
+        return this.driverName;
+    }
 
     public Vehicle(String registrationNumber, double driverRating, String driverName, String phoneNumber, Location location) {
         this.registrationNumber = registrationNumber;
         this.driverRating = driverRating;
         this.location = location;
+        this.driverName = driverName;
     }
 
 
@@ -79,12 +101,4 @@ public abstract class Vehicle implements MapItem {
         int CurrentY = location.getY();
         return SetLocation(CurrentX + x, CurrentY + y);
     }
-    @Override
-    public String toString() {
-        return "Vehicle type: " + this.getClass().getSimpleName() +
-            ", Registration Number: " + getRegistrationNumber() +
-            ", Driver Rating: " + getDriverRating() +
-            ", Location: " + GetLocation();
-    }
 }
-

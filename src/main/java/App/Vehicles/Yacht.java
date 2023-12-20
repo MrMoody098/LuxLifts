@@ -1,7 +1,7 @@
 package App.Vehicles;
 
 import App.Map.Location;
-import App.Map.MapItem;
+
 import App.Vehicles.Types.WaterVehicle;
 
 public class Yacht extends WaterVehicle {
