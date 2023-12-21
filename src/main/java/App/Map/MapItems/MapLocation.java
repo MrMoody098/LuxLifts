@@ -10,6 +10,10 @@ import java.io.FileNotFoundException;
  * Implements the MapItem interface to interact with the map.
  */
 public class MapLocation implements MapItem {
+    private int[] surrogates = {0x1F3E0};
+    //house emoji
+    public String symbol = new String(surrogates, 0, surrogates.length);
+
     private Location location;
     private String name;
 

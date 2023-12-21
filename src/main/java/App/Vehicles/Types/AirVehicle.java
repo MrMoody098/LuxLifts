@@ -5,15 +5,19 @@ import App.Map.Location;
 import App.Vehicles.Vehicle;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 public class AirVehicle extends Vehicle {
+    private static int[] surrogates = {0x1F695};
+    //
+    public static String AirPlane = new String(surrogates, 0, surrogates.length);
     public AirVehicle(String registrationNumber, double driverRating, String driverName, String phoneNumber, Location location) {
         super(registrationNumber, driverRating, driverName, phoneNumber, location);
 
     }
 
     @Override
-    public Location MoveTo(Location destination, CustomMap customMap) throws FileNotFoundException {
+    public Location MoveTo(Location destination, CustomMap customMap) throws IOException {
         customMap.addElement(this,"V");
         while (GetLocation().getX() != destination.getX() || GetLocation().getY() != destination.getY()) {
             customMap.addElement(this,"V");
@@ -32,8 +36,10 @@ public class AirVehicle extends Vehicle {
             else if (MyY > destinationY) {SetLocation(MyX,MyY -= 1);}
             //display updated position
             customMap.displayMap();
+            System.out.println("");
         }
         customMap.displayMap();
+        System.out.println("");
         return GetLocation();
     }
 }

@@ -11,8 +11,8 @@ import java.security.NoSuchAlgorithmException;
 public class Auth {
 
     // File paths for user and vehicle data
-    public static String USER_CSV_FILE = "src/main/java/App/UserData/Users.csv";
-    public static String VEHICLE_CSV_FILE = "src/main/java/App/VehicleGenerator/Vehicles.csv";
+    public static String USER_CSV_FILE = "LuxLifts/src/main/java/App/UserData/Users.csv";
+    public static String VEHICLE_CSV_FILE = "LuxLifts/src/main/java/App/VehicleGenerator/Vehicles.csv";
 
     /**
      * Authenticates a user based on provided credentials.

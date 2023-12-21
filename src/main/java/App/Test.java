@@ -14,8 +14,6 @@ public class Test {
     public static void main(String[] args) throws IOException {
         CustomMap customMap = new CustomMap();
         customMap.displayMap();
-        customMap.addMapItems();
-        customMap.displayMap();
         customMap.PrintMapLocations();
 //      ///***  //make a test helicopter
 //        Helicopter heli = new Helicopter("ABC386",5,

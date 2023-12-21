@@ -10,8 +10,10 @@ public abstract class Vehicle implements MapItem {
      private String phoneNumber;
     private double driverRating;
     private VehicleType type;
-    private boolean isAvailable;
-
+    private boolean isAvailable = true;
+    public double updateDriverRating(double rating){
+        return (rating+driverRating)/2;
+    }
 
     public void setSpeed(int speed) {
         Speed = speed;
@@ -73,10 +75,12 @@ public abstract class Vehicle implements MapItem {
     }
     public void printVehicleDetails() {
         System.out.println("Registration Number: " + this.registrationNumber);
+        System.out.println("Driver Name: "+ getDriverName());
         //System.err.println("Location: " + this.location);
-        System.out.println("Driver Rating: " + this.driverRating);
+        System.out.println("Driver Rating: " + getDriverRating());
         System.out.println("Vehicle Type: " + this.type);
         System.out.println("Is Available: " + this.isAvailable);
+
     }
     public int getSpeed() {
         return Speed;
@@ -94,6 +98,7 @@ public abstract class Vehicle implements MapItem {
         //return the current location of the Passenger
         return this.location;
     }
+
 
     @Override
     public Location UpdateLocation(int x, int y) {

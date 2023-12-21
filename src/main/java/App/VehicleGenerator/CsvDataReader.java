@@ -21,10 +21,10 @@ import java.util.Scanner;
  */
 public class CsvDataReader {
     // File paths for CSV data
-    private static String VEHICLE_CSV = "src/main/java/App/VehicleGenerator/Vehicles.csv";
-    private static String MAP_LOCATION_CSV = "src/main/java/App/Map/MapItems/MapLocations.csv";
-    private static String HELIPAD_LOCATIONS_CSV = "src/main/java/App/Map/MapItems/HelipadLocations.csv";
-    private static String WATER_LOCATIONS_CSV = "src/main/java/App/Map/MapItems/WaterLocations.csv";
+    private static String VEHICLE_CSV = "LuxLifts/src/main/java/App/VehicleGenerator/Vehicles.csv";
+    private static String MAP_LOCATION_CSV = "LuxLifts/src/main/java/App/Map/MapItems/MapLocations.csv";
+    private static String HELIPAD_LOCATIONS_CSV = "LuxLifts/src/main/java/App/Map/MapItems/HelipadLocations.csv";
+    private static String WATER_LOCATIONS_CSV = "LuxLifts/src/main/java/App/Map/MapItems/WaterLocations.csv";
     private static Scanner scanner = new Scanner(System.in);
 
     /**

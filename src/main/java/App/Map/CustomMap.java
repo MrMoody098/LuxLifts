@@ -16,6 +16,7 @@ import App.DataTypes.*; // Assuming this package exists
  * CustomMap class represents a grid-based map with Vehicles.
  */
 public class CustomMap {
+
     private Map<Location, String> mapElements; // Map to store elements and their symbols at specific locations
     private DoubleLinkedList<Vehicle> Vehicles; // List to store Vehicles on the map
     private List<MapLocation> MapLocations = CsvDataReader.returnMapLocations(); // List of MapLocations
@@ -38,23 +39,20 @@ public class CustomMap {
     public CustomMap() throws IOException {
         this.mapElements = new HashMap<>();
         this.Vehicles = new DoubleLinkedList<>();
-        
-        initializeMap();
     }
 
     // Method to initialize the map with Vehicles
-    public void initializeMap() throws IOException {
-        List<Vehicle> vehicleList = CsvDataReader.returnVehicleList();
-        for (Vehicle vehicle : vehicleList) {
-            addElement(vehicle, "V"); // Add Vehicle to the map and list
+    public void initializeVehicles() throws IOException {
+        for (Vehicle vehicle : getVehicles().getAll()) {
+            addElement(vehicle,"V"); // Add Vehicle to the map and list
             Vehicles.add(vehicle);
         }
     }
 
     // Method to add various MapItems (MapLocations, HeliPads, Water) to the map
-    public void addMapItems(){
+    public void intiializeMapItems(){
         for (MapLocation mapLocation : MapLocations) {
-            addElement(mapLocation, "M");
+            addElement(mapLocation, mapLocation.symbol);
         }
         for (HeliPad heliPad : HeliPads) {
             addElement(heliPad, "H");
@@ -68,7 +66,6 @@ public class CustomMap {
     public void addVehicles() throws IOException {
         System.out.println("Vehicles added successfully!");
         List<Vehicle> returnedList = CsvDataReader.returnVehicleList();
-
         for (Vehicle vehicle : returnedList) {
             Vehicles.add(vehicle);
             addElement(vehicle, "V");
@@ -77,22 +74,7 @@ public class CustomMap {
 
     // Method to add a user to the map
     public void addUser(Passenger user) {
-        Scanner scanner =new Scanner(System.in);
-        System.out.println("Enter your x-coordinate:");
-        int x = scanner.nextInt();
-
-        System.out.println("Enter your y-coordinate:");
-        int y = scanner.nextInt();
-
-        Location location = new Location(x, y);
-
-        // Check if the user's location is within the map bounds and not already occupied
-        if (isWithinMapBounds(x, y) && !mapElements.containsKey(location)) {
-            addElement(user, "U"); // Add user to the map
-            System.out.println("User added successfully!");
-        } else {
-            System.out.println("Invalid coordinates or location already occupied.");
-        }
+        addElement(user,"U");
     }
 
     // Method to display the initial state of the map
@@ -108,9 +90,9 @@ public class CustomMap {
     }
 
     // Method to add a MapItem to the map
-    public void addElement(MapItem element, String symbol) {
+    public void addElement(MapItem element,String symbol) {
         Location location = element.GetLocation();
-        mapElements.put(location, symbol); // Add the element to the map
+        mapElements.put(location,symbol); // Add the element to the map
     }
 
     // Method to remove a MapItem from the map
@@ -146,7 +128,11 @@ public class CustomMap {
     }
 
     // Method to display the current state of the map
-    public void displayMap() {
+    public void displayMap(Passenger user) throws IOException {
+        emptyMapElements();
+        addUser(user);
+        initializeVehicles();
+        intiializeMapItems();
         for (int i = 9; i >= 0; i--) {
             for (int j = 0; j < 10; j++) {
                 Location currentLocation = new Location(j, i);
@@ -155,6 +141,23 @@ public class CustomMap {
             }
             System.out.println();
         }
+    }
+    public void displayMap() throws IOException {
+        emptyMapElements();
+
+        initializeVehicles();
+        intiializeMapItems();
+        for (int i = 9; i >= 0; i--) {
+            for (int j = 0; j < 10; j++) {
+                Location currentLocation = new Location(j, i);
+                String element = mapElements.getOrDefault(currentLocation, ".");
+                System.out.print(element + "  ");
+            }
+            System.out.println();
+        }
+    }
+    public void emptyMapElements(){
+        this.mapElements.clear();
     }
 
     // Method to check if coordinates are within the bounds of the map

@@ -1,15 +1,19 @@
 package App;
 import App.Authentication.Auth;
 import App.DataTypes.DoubleLinkedList;
+import App.DataTypes.Node;
 import App.DataTypes.Passenger;
 import App.Map.CustomMap;
 import App.Map.Location;
 import App.Map.MapItems.MapLocation;
 import App.VehicleGenerator.CsvGenerator;
 import App.Vehicles.Vehicle;
+
+import java.awt.*;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.*;
+import java.util.List;
 
 /**
  * The main class for testing the Login, Signup, and Map functionalities.
@@ -38,9 +42,10 @@ public class Main implements VehicleHiringTest {
      */
     public static void main(String[] args) throws IOException {
         // Test the Login and Signup functionality
-        // Test the Map functionality
-        logo();
-        user = LoginSignupTest();
+//        // Test the Map functionality
+//        logo();
+//        user = LoginSignupTest();
+        user = new Passenger("johnny",new Location(0,0));
         MapTest();
     }
 
@@ -112,27 +117,14 @@ public class Main implements VehicleHiringTest {
      */
     public static void MapTest() throws IOException {
         // Display program logo
-        logo();
         System.out.println("\nThis is the initial map:");
-
-        customMap.firstMap(); // Display the initial map
-        customMap.addMapItems(); // Add MapItems (MapLocations, HeliPads, Water) to the map
-        customMap.displayMap(); // Display the updated map
-        customMap.addUser(user);
-        System.out.println("Do you want to see vehicles on the map?");
-        String input = scanner.nextLine();
-        if (input.equalsIgnoreCase("yes")) {
-            System.out.println("\nPlease first Login/Signup");
-            user = LoginSignupTest(); // Get the current user through login or signup
-        } else {
-            System.out.println("You first need to login/signup");
-        }
-        customMap.addUser(user);
+        AddUser();
+        customMap.displayMap(user); // Display the updated map
+        customMap.addVehicles();
+        System.out.println("displaying vehicles");
+        customMap.displayMap(user);
         // Test getting vehicles in contact range and display details
         DoubleLinkedList<Vehicle> vehiclesInContact = customMap.getVehiclesInContactRange(user, 2);
-        System.out.println("Please Pick a destination");
-        customMap.PrintMapLocations();
-        String des = scanner.next();
         System.out.println("Vehicles in contact range:");
         if (vehiclesInContact.size() == 0) {
             System.out.println("No vehicles found");
@@ -148,11 +140,34 @@ public class Main implements VehicleHiringTest {
         for (Vehicle vehicle : customMap.getVehicles().getAll()) {
             if (vehicle.getRegistrationNumber().equals(reg)) {
                 try {
-                    Location finalLocation = vehicle.MoveTo(new Location(1, 8), customMap);
+                    System.out.println("pick a destination");
+                    customMap.PrintMapLocations();
+                    String des = scanner.next();
+                    for (MapLocation mapLocation : customMap.returnMapLocations()) {
+                        if (mapLocation.getName().equalsIgnoreCase(des)) {
+                            Location destination = mapLocation.GetLocation();
+                            System.out.println("Destination: "+destination.getX()+" "+destination.getY());
+                            vehicle.MoveTo(new Location(user.GetLocation().getX(), user.GetLocation().getY()), customMap);
+                            System.out.println("Driver arrived at user");
+                            Location location = vehicle.MoveTo(destination, customMap);
+                            user.SetLocation(location.getX(), location.getY());
+                            System.out.println("You have arrived your destiantion");
+                            System.out.println("inital Driver rating "+vehicle.getDriverRating());
+                            System.out.println("Rate Driver 0-5");
+                            double rating = scanner.nextDouble();
+                            vehicle.updateDriverRating(rating);
+                            System.out.println("You rated "+vehicle.getDriverName());
+                            System.out.println(vehicle.getDriverName()+" "+ vehicle.getType()
+
+                            );
+                        }
+                    }
 
                 } catch (FileNotFoundException e) {
                     // Handle the exception (e.g., print an error message)
                     e.printStackTrace();
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
                 }
             }
         }
@@ -161,21 +176,14 @@ public class Main implements VehicleHiringTest {
     // Method to test adding vehicles to the map
 
     // Method to add the user to the map
-    public static void AddUser() {
+    public static void AddUser() throws IOException {
         System.out.println("Adding the user to the map.");
-
-        System.out.println("Enter the initial location for the user (x, y):");
-
-        System.out.print("X: ");
-        int x = scanner.nextInt();
-        System.out.print("Y: ");
-        int y = scanner.nextInt();
-
-        user.SetLocation(x, y);
-        customMap.addElement(user, "U"); // Add the user to the map with the letter "U"
-
-        System.out.println("User added to the map.");
-        customMap.displayMap();
+        System.out.println("Enter user X");
+        int X = scanner.nextInt();
+        System.out.println("Enter user Y");
+        int Y = scanner.nextInt();
+        user.SetLocation(X,Y);
+        customMap.displayMap(user);
     }
 
     // Method to move a vehicle based on user input
@@ -199,7 +207,7 @@ public class Main implements VehicleHiringTest {
                     vehicle.SetLocation(x, y);
                 }
             }
-            customMap.initializeMap();
+            customMap.displayMap(user);
         }
     }
 
@@ -224,7 +232,7 @@ public class Main implements VehicleHiringTest {
                 try {
                     Location finalLocation = vehicle.MoveTo(location, customMap);
                     return finalLocation.equals(location);
-                } catch (FileNotFoundException e) {
+                } catch (InterruptedException | IOException e) {
                     // Handle the exception (e.g., print an error message)
                     e.printStackTrace();
                     return false;

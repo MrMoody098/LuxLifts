@@ -4,11 +4,14 @@ import App.Map.CustomMap;
 import App.Map.Location;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 
 /**
  * Interface representing a map item that can be placed on a map.
  */
 public interface MapItem {
+
+
     /**
      * Sets the location of the map item to the specified coordinates.
      *
@@ -42,5 +45,5 @@ public interface MapItem {
      * @return The final location after moving to the destination.
      * @throws FileNotFoundException If the file is not found while moving.
      */
-    Location MoveTo(Location destination, CustomMap customMap) throws FileNotFoundException;
+    Location MoveTo(Location destination, CustomMap customMap) throws IOException, InterruptedException;
 }
