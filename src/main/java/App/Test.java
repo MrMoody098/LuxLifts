@@ -11,7 +11,7 @@ import App.Vehicles.VehicleType;
 import java.io.IOException;
 
 public class Test {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         CustomMap customMap = new CustomMap();
         customMap.displayMap();
         customMap.PrintMapLocations();

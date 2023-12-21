@@ -40,7 +40,7 @@ public class Main implements VehicleHiringTest {
      * @param args Command-line arguments (not used in this program).
      * @throws FileNotFoundException If a file required for the program is not found.
      */
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
         // Test the Login and Signup functionality
 //        // Test the Map functionality
 //        logo();
@@ -115,14 +115,16 @@ public class Main implements VehicleHiringTest {
     /**
      * Method to test the Map functionality.
      */
-    public static void MapTest() throws IOException {
+    public static void MapTest() throws IOException, InterruptedException {
         // Display program logo
         System.out.println("\nThis is the initial map:");
         AddUser();
         customMap.displayMap(user); // Display the updated map
+        Thread.sleep(900);
         customMap.addVehicles();
         System.out.println("displaying vehicles");
         customMap.displayMap(user);
+        Thread.sleep(900);
         // Test getting vehicles in contact range and display details
         DoubleLinkedList<Vehicle> vehiclesInContact = customMap.getVehiclesInContactRange(user, 2);
         System.out.println("Vehicles in contact range:");
@@ -130,6 +132,7 @@ public class Main implements VehicleHiringTest {
             System.out.println("No vehicles found");
         } else {
             for (Vehicle vehicle : vehiclesInContact.getAll()) {
+                Thread.sleep(900);
                 vehicle.printVehicleDetails();
                 System.out.println();
             }
@@ -146,20 +149,25 @@ public class Main implements VehicleHiringTest {
                     for (MapLocation mapLocation : customMap.returnMapLocations()) {
                         if (mapLocation.getName().equalsIgnoreCase(des)) {
                             Location destination = mapLocation.GetLocation();
+                            Thread.sleep(1200);
                             System.out.println("Destination: "+destination.getX()+" "+destination.getY());
+                            Thread.sleep(1200);
                             vehicle.MoveTo(new Location(user.GetLocation().getX(), user.GetLocation().getY()), customMap);
-                            System.out.println("Driver arrived at user");
+                            Thread.sleep(1200);
+                            System.out.println("Driver arrived at user!!");
+                            Thread.sleep(1200);
                             Location location = vehicle.MoveTo(destination, customMap);
                             user.SetLocation(location.getX(), location.getY());
+                            Thread.sleep(1200);
                             System.out.println("You have arrived your destiantion");
+                            Thread.sleep(900);
                             System.out.println("inital Driver rating "+vehicle.getDriverRating());
                             System.out.println("Rate Driver 0-5");
                             double rating = scanner.nextDouble();
                             vehicle.updateDriverRating(rating);
                             System.out.println("You rated "+vehicle.getDriverName());
-                            System.out.println(vehicle.getDriverName()+" "+ vehicle.getType()
-
-                            );
+                            System.out.println(vehicle.getDriverName()+" "+ vehicle.getType());
+                            System.out.println("Thank you for using LuxLifts :)");
                         }
                     }
 
@@ -183,7 +191,6 @@ public class Main implements VehicleHiringTest {
         System.out.println("Enter user Y");
         int Y = scanner.nextInt();
         user.SetLocation(X,Y);
-        customMap.displayMap(user);
     }
 
     // Method to move a vehicle based on user input

@@ -142,9 +142,9 @@ public class CustomMap {
             System.out.println();
         }
     }
-    public void displayMap() throws IOException {
+    public void displayMap() throws IOException{
         emptyMapElements();
-
+        System.out.println();
         initializeVehicles();
         intiializeMapItems();
         for (int i = 9; i >= 0; i--) {
@@ -155,6 +155,7 @@ public class CustomMap {
             }
             System.out.println();
         }
+        System.out.println();
     }
     public void emptyMapElements(){
         this.mapElements.clear();

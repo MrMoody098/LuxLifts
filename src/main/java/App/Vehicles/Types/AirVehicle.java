@@ -17,10 +17,10 @@ public class AirVehicle extends Vehicle {
     }
 
     @Override
-    public Location MoveTo(Location destination, CustomMap customMap) throws IOException {
-        customMap.addElement(this,"V");
+    public Location MoveTo(Location destination, CustomMap customMap) throws IOException, InterruptedException {
+        customMap.addElement(this,"@");
         while (GetLocation().getX() != destination.getX() || GetLocation().getY() != destination.getY()) {
-            customMap.addElement(this,"V");
+            customMap.addElement(this,"@");
             int MyX = GetLocation().getX();
             int MyY = GetLocation().getY();
             int destinationX = destination.getX();
@@ -37,9 +37,10 @@ public class AirVehicle extends Vehicle {
             //display updated position
             customMap.displayMap();
             System.out.println("");
+            Thread.sleep(1000);
         }
-        customMap.displayMap();
         System.out.println("");
+        Thread.sleep(1000);
         return GetLocation();
     }
 }
