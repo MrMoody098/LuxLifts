@@ -43,9 +43,8 @@ public class Main implements VehicleHiringTest {
     public static void main(String[] args) throws IOException, InterruptedException {
         // Test the Login and Signup functionality
 //        // Test the Map functionality
-//        logo();
-//        user = LoginSignupTest();
-        user = new Passenger("johnny",new Location(0,0));
+        logo();
+        user = LoginSignupTest();
         MapTest();
     }
 
@@ -86,6 +85,9 @@ public class Main implements VehicleHiringTest {
             else if (choice.equals("2") || choice.equalsIgnoreCase("SIGNUP")) {
                 // Store Passenger returned from signup (could be null if unsuccessful)
                 passenger = SignUp();
+            }
+            else{
+                System.out.println("invalid input");
             }
         }
         // Return passenger; it cannot be null as the loop won't stop until passenger is not null
@@ -138,10 +140,10 @@ public class Main implements VehicleHiringTest {
             }
         }
 
-        System.out.println("pick a vehicle by reg");
+        System.out.println("pick a vehicle by Registration number / Driver name");
         String reg = scanner.next();
         for (Vehicle vehicle : customMap.getVehicles().getAll()) {
-            if (vehicle.getRegistrationNumber().equals(reg)) {
+            if (vehicle.getRegistrationNumber().equals(reg)||vehicle.getDriverName().equals(reg)) {
                 try {
                     System.out.println("pick a destination");
                     customMap.PrintMapLocations();
